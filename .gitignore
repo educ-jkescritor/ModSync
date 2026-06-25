@@ -1,0 +1,12 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/data/*.sqlite3
+frontend/.next/
+frontend/node_modules/
+frontend/out/
+outputs/*.tmp
+

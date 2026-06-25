@@ -1,0 +1,174 @@
+[
+  {
+    "name": "AngularJS",
+    "aliases": ["Angular.js", "Angular 1", "AngularJS 1.x"],
+    "category": "Frontend framework",
+    "lifecycle_risk": 40,
+    "lifecycle_status": "Long-term support ended; modern Angular is maintained separately.",
+    "official_documentation": ["https://docs.angularjs.org/", "https://angular.dev/"],
+    "learning_resources": ["https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks", "https://angular.dev/tutorials"]
+  },
+  {
+    "name": "Angular",
+    "aliases": ["Angular 2", "Angular 17", "Angular 18"],
+    "category": "Frontend framework",
+    "lifecycle_risk": 8,
+    "lifecycle_status": "Actively maintained framework with versioned releases.",
+    "official_documentation": ["https://angular.dev/"],
+    "learning_resources": ["https://angular.dev/tutorials", "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"]
+  },
+  {
+    "name": "React",
+    "aliases": ["React.js", "ReactJS"],
+    "category": "Frontend library",
+    "lifecycle_risk": 6,
+    "lifecycle_status": "Actively maintained UI library with broad industry adoption.",
+    "official_documentation": ["https://react.dev/"],
+    "learning_resources": ["https://react.dev/learn", "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"]
+  },
+  {
+    "name": "Vue",
+    "aliases": ["Vue.js", "VueJS"],
+    "category": "Frontend framework",
+    "lifecycle_risk": 7,
+    "lifecycle_status": "Actively maintained frontend framework.",
+    "official_documentation": ["https://vuejs.org/"],
+    "learning_resources": ["https://vuejs.org/tutorial/", "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"]
+  },
+  {
+    "name": "Bootstrap 3",
+    "aliases": ["Bootstrap v3", "Twitter Bootstrap 3"],
+    "category": "CSS framework",
+    "lifecycle_risk": 34,
+    "lifecycle_status": "Older major version; modern Bootstrap versions include different layout, utility, and accessibility practices.",
+    "official_documentation": ["https://getbootstrap.com/docs/3.4/", "https://getbootstrap.com/docs/5.3/"],
+    "learning_resources": ["https://getbootstrap.com/docs/5.3/getting-started/introduction/", "https://developer.mozilla.org/en-US/docs/Learn/CSS"]
+  },
+  {
+    "name": "Bootstrap 5",
+    "aliases": ["Bootstrap v5"],
+    "category": "CSS framework",
+    "lifecycle_risk": 5,
+    "lifecycle_status": "Current major Bootstrap line.",
+    "official_documentation": ["https://getbootstrap.com/docs/5.3/"],
+    "learning_resources": ["https://getbootstrap.com/docs/5.3/examples/", "https://developer.mozilla.org/en-US/docs/Learn/CSS"]
+  },
+  {
+    "name": "PHP 5",
+    "aliases": ["PHP5"],
+    "category": "Programming language runtime",
+    "lifecycle_risk": 40,
+    "lifecycle_status": "Security support has ended for this major PHP line.",
+    "official_documentation": ["https://www.php.net/releases/", "https://www.php.net/supported-versions.php"],
+    "learning_resources": ["https://www.php.net/manual/en/getting-started.php", "https://www.php-fig.org/psr/"]
+  },
+  {
+    "name": "PHP 7",
+    "aliases": ["PHP7"],
+    "category": "Programming language runtime",
+    "lifecycle_risk": 30,
+    "lifecycle_status": "Older major PHP line; support status should be checked against official PHP guidance.",
+    "official_documentation": ["https://www.php.net/supported-versions.php"],
+    "learning_resources": ["https://www.php.net/manual/en/getting-started.php", "https://www.php-fig.org/psr/"]
+  },
+  {
+    "name": "PHP 8",
+    "aliases": ["PHP8"],
+    "category": "Programming language runtime",
+    "lifecycle_risk": 8,
+    "lifecycle_status": "Current major PHP line with active version support depending on minor release.",
+    "official_documentation": ["https://www.php.net/supported-versions.php", "https://www.php.net/releases/8.0/en.php"],
+    "learning_resources": ["https://www.php.net/manual/en/getting-started.php", "https://www.php-fig.org/psr/"]
+  },
+  {
+    "name": "MySQL",
+    "aliases": ["My SQL"],
+    "category": "Database",
+    "lifecycle_risk": 8,
+    "lifecycle_status": "Widely used relational database with version-specific support windows.",
+    "official_documentation": ["https://dev.mysql.com/doc/"],
+    "learning_resources": ["https://dev.mysql.com/doc/refman/8.4/en/tutorial.html", "https://sqlbolt.com/"]
+  },
+  {
+    "name": "PostgreSQL",
+    "aliases": ["Postgres", "Postgre SQL"],
+    "category": "Database",
+    "lifecycle_risk": 6,
+    "lifecycle_status": "Actively maintained relational database with regular major releases.",
+    "official_documentation": ["https://www.postgresql.org/docs/"],
+    "learning_resources": ["https://www.postgresql.org/docs/current/tutorial.html", "https://sqlbolt.com/"]
+  },
+  {
+    "name": "Docker",
+    "aliases": ["Docker Engine", "Dockerfile"],
+    "category": "Containerization",
+    "lifecycle_risk": 5,
+    "lifecycle_status": "Current containerization platform; practices vary by version and deployment target.",
+    "official_documentation": ["https://docs.docker.com/"],
+    "learning_resources": ["https://docs.docker.com/get-started/", "https://docs.docker.com/language/"]
+  },
+  {
+    "name": "Kubernetes",
+    "aliases": ["K8s"],
+    "category": "Container orchestration",
+    "lifecycle_risk": 7,
+    "lifecycle_status": "Actively maintained orchestration platform with frequent version releases.",
+    "official_documentation": ["https://kubernetes.io/docs/home/"],
+    "learning_resources": ["https://kubernetes.io/docs/tutorials/", "https://kubernetes.io/docs/concepts/overview/"]
+  },
+  {
+    "name": "Git",
+    "aliases": ["Git SCM"],
+    "category": "Version control",
+    "lifecycle_risk": 4,
+    "lifecycle_status": "Current distributed version control system with broad adoption.",
+    "official_documentation": ["https://git-scm.com/doc"],
+    "learning_resources": ["https://git-scm.com/book/en/v2", "https://docs.github.com/en/get-started/using-git/about-git"]
+  },
+  {
+    "name": "SVN",
+    "aliases": ["Subversion", "Apache Subversion"],
+    "category": "Version control",
+    "lifecycle_risk": 28,
+    "lifecycle_status": "Still available, but many modern software teams emphasize distributed version control workflows.",
+    "official_documentation": ["https://subversion.apache.org/docs/"],
+    "learning_resources": ["https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control", "https://docs.github.com/en/get-started/using-git/about-git"]
+  },
+  {
+    "name": "Jenkins",
+    "aliases": ["Jenkins CI"],
+    "category": "CI/CD",
+    "lifecycle_risk": 12,
+    "lifecycle_status": "Actively maintained automation server; pipeline practices and plugin security require ongoing review.",
+    "official_documentation": ["https://www.jenkins.io/doc/"],
+    "learning_resources": ["https://www.jenkins.io/doc/book/pipeline/", "https://docs.github.com/en/actions"]
+  },
+  {
+    "name": "AWS",
+    "aliases": ["Amazon Web Services"],
+    "category": "Cloud platform",
+    "lifecycle_risk": 6,
+    "lifecycle_status": "Actively evolving cloud platform.",
+    "official_documentation": ["https://docs.aws.amazon.com/"],
+    "learning_resources": ["https://aws.amazon.com/training/", "https://aws.amazon.com/getting-started/"]
+  },
+  {
+    "name": "Azure",
+    "aliases": ["Microsoft Azure"],
+    "category": "Cloud platform",
+    "lifecycle_risk": 6,
+    "lifecycle_status": "Actively evolving cloud platform.",
+    "official_documentation": ["https://learn.microsoft.com/azure/"],
+    "learning_resources": ["https://learn.microsoft.com/training/azure/", "https://learn.microsoft.com/azure/cloud-adoption-framework/"]
+  },
+  {
+    "name": "GCP",
+    "aliases": ["Google Cloud", "Google Cloud Platform"],
+    "category": "Cloud platform",
+    "lifecycle_risk": 6,
+    "lifecycle_status": "Actively evolving cloud platform.",
+    "official_documentation": ["https://cloud.google.com/docs"],
+    "learning_resources": ["https://cloud.google.com/learn", "https://cloud.google.com/training"]
+  }
+]
+

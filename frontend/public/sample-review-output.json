@@ -1,0 +1,1258 @@
+{
+  "filename": "example-module.pdf",
+  "file_size": 2613,
+  "pages_analyzed": 2,
+  "detections": [
+    {
+      "technology": "AngularJS",
+      "alias": "AngularJS",
+      "page": 1,
+      "start": 146,
+      "end": 155,
+      "category": "Frontend framework",
+      "lifecycle_risk": 40
+    },
+    {
+      "technology": "Bootstrap 3",
+      "alias": "Bootstrap 3",
+      "page": 1,
+      "start": 160,
+      "end": 171,
+      "category": "CSS framework",
+      "lifecycle_risk": 34
+    },
+    {
+      "technology": "React",
+      "alias": "React",
+      "page": 1,
+      "start": 230,
+      "end": 235,
+      "category": "Frontend library",
+      "lifecycle_risk": 6
+    },
+    {
+      "technology": "Vue",
+      "alias": "Vue",
+      "page": 1,
+      "start": 240,
+      "end": 243,
+      "category": "Frontend framework",
+      "lifecycle_risk": 7
+    },
+    {
+      "technology": "PHP 5",
+      "alias": "PHP 5",
+      "page": 2,
+      "start": 67,
+      "end": 72,
+      "category": "Programming language runtime",
+      "lifecycle_risk": 40
+    },
+    {
+      "technology": "MySQL",
+      "alias": "MySQL",
+      "page": 2,
+      "start": 98,
+      "end": 103,
+      "category": "Database",
+      "lifecycle_risk": 8
+    },
+    {
+      "technology": "Docker",
+      "alias": "Docker",
+      "page": 2,
+      "start": 160,
+      "end": 166,
+      "category": "Containerization",
+      "lifecycle_risk": 5
+    },
+    {
+      "technology": "SVN",
+      "alias": "SVN",
+      "page": 2,
+      "start": 235,
+      "end": 238,
+      "category": "Version control",
+      "lifecycle_risk": 28
+    },
+    {
+      "technology": "Git",
+      "alias": "Git",
+      "page": 2,
+      "start": 243,
+      "end": 246,
+      "category": "Version control",
+      "lifecycle_risk": 4
+    }
+  ],
+  "metadata": [
+    {
+      "technology": "AngularJS",
+      "category": "Frontend framework",
+      "frequency": 1,
+      "pages": [
+        1
+      ],
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "This module introduces browser-based application patterns.",
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples."
+          ],
+          "context_text": "This module introduces browser-based application patterns. Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 40,
+      "lifecycle_status": "Long-term support ended; modern Angular is maintained separately.",
+      "official_documentation": [
+        "https://docs.angularjs.org/",
+        "https://angular.dev/"
+      ],
+      "learning_resources": [
+        "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks",
+        "https://angular.dev/tutorials"
+      ]
+    },
+    {
+      "technology": "Bootstrap 3",
+      "category": "CSS framework",
+      "frequency": 1,
+      "pages": [
+        1
+      ],
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "This module introduces browser-based application patterns.",
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples."
+          ],
+          "context_text": "This module introduces browser-based application patterns. Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 34,
+      "lifecycle_status": "Older major version; modern Bootstrap versions include different layout, utility, and accessibility practices.",
+      "official_documentation": [
+        "https://getbootstrap.com/docs/3.4/",
+        "https://getbootstrap.com/docs/5.3/"
+      ],
+      "learning_resources": [
+        "https://getbootstrap.com/docs/5.3/getting-started/introduction/",
+        "https://developer.mozilla.org/en-US/docs/Learn/CSS"
+      ]
+    },
+    {
+      "technology": "Docker",
+      "category": "Containerization",
+      "frequency": 1,
+      "pages": [
+        2
+      ],
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "Students will configure PHP 5 examples that connect to MySQL.",
+            "For deployment, learners will package the service with Docker.",
+            "A learning activity asks students to document version control with SVN and Git."
+          ],
+          "context_text": "Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 5,
+      "lifecycle_status": "Current containerization platform; practices vary by version and deployment target.",
+      "official_documentation": [
+        "https://docs.docker.com/"
+      ],
+      "learning_resources": [
+        "https://docs.docker.com/get-started/",
+        "https://docs.docker.com/language/"
+      ]
+    },
+    {
+      "technology": "Git",
+      "category": "Version control",
+      "frequency": 1,
+      "pages": [
+        2
+      ],
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "For deployment, learners will package the service with Docker.",
+            "A learning activity asks students to document version control with SVN and Git.",
+            "Faculty validation is required before any curriculum decision is made."
+          ],
+          "context_text": "For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git. Faculty validation is required before any curriculum decision is made.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": false,
+      "lifecycle_risk": 4,
+      "lifecycle_status": "Current distributed version control system with broad adoption.",
+      "official_documentation": [
+        "https://git-scm.com/doc"
+      ],
+      "learning_resources": [
+        "https://git-scm.com/book/en/v2",
+        "https://docs.github.com/en/get-started/using-git/about-git"
+      ]
+    },
+    {
+      "technology": "MySQL",
+      "category": "Database",
+      "frequency": 1,
+      "pages": [
+        2
+      ],
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "Module 7: Backend and Deployment Practices",
+            "Students will configure PHP 5 examples that connect to MySQL.",
+            "For deployment, learners will package the service with Docker."
+          ],
+          "context_text": "Module 7: Backend and Deployment Practices Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": false,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 8,
+      "lifecycle_status": "Widely used relational database with version-specific support windows.",
+      "official_documentation": [
+        "https://dev.mysql.com/doc/"
+      ],
+      "learning_resources": [
+        "https://dev.mysql.com/doc/refman/8.4/en/tutorial.html",
+        "https://sqlbolt.com/"
+      ]
+    },
+    {
+      "technology": "PHP 5",
+      "category": "Programming language runtime",
+      "frequency": 1,
+      "pages": [
+        2
+      ],
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "Module 7: Backend and Deployment Practices",
+            "Students will configure PHP 5 examples that connect to MySQL.",
+            "For deployment, learners will package the service with Docker."
+          ],
+          "context_text": "Module 7: Backend and Deployment Practices Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": false,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 40,
+      "lifecycle_status": "Security support has ended for this major PHP line.",
+      "official_documentation": [
+        "https://www.php.net/releases/",
+        "https://www.php.net/supported-versions.php"
+      ],
+      "learning_resources": [
+        "https://www.php.net/manual/en/getting-started.php",
+        "https://www.php-fig.org/psr/"
+      ]
+    },
+    {
+      "technology": "React",
+      "category": "Frontend library",
+      "frequency": 1,
+      "pages": [
+        1
+      ],
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples.",
+            "Faculty review suggested: confirm whether the chosen examples still support the target competencies."
+          ],
+          "context_text": "Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples. Faculty review suggested: confirm whether the chosen examples still support the target competencies.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 6,
+      "lifecycle_status": "Actively maintained UI library with broad industry adoption.",
+      "official_documentation": [
+        "https://react.dev/"
+      ],
+      "learning_resources": [
+        "https://react.dev/learn",
+        "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"
+      ]
+    },
+    {
+      "technology": "SVN",
+      "category": "Version control",
+      "frequency": 1,
+      "pages": [
+        2
+      ],
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "For deployment, learners will package the service with Docker.",
+            "A learning activity asks students to document version control with SVN and Git.",
+            "Faculty validation is required before any curriculum decision is made."
+          ],
+          "context_text": "For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git. Faculty validation is required before any curriculum decision is made.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": false,
+      "lifecycle_risk": 28,
+      "lifecycle_status": "Still available, but many modern software teams emphasize distributed version control workflows.",
+      "official_documentation": [
+        "https://subversion.apache.org/docs/"
+      ],
+      "learning_resources": [
+        "https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control",
+        "https://docs.github.com/en/get-started/using-git/about-git"
+      ]
+    },
+    {
+      "technology": "Vue",
+      "category": "Frontend framework",
+      "frequency": 1,
+      "pages": [
+        1
+      ],
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples.",
+            "Faculty review suggested: confirm whether the chosen examples still support the target competencies."
+          ],
+          "context_text": "Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples. Faculty review suggested: confirm whether the chosen examples still support the target competencies.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "appears_in_labs": true,
+      "appears_in_learning_activities": true,
+      "lifecycle_risk": 7,
+      "lifecycle_status": "Actively maintained frontend framework.",
+      "official_documentation": [
+        "https://vuejs.org/"
+      ],
+      "learning_resources": [
+        "https://vuejs.org/tutorial/",
+        "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "technology": "AngularJS",
+      "review_priority": "High",
+      "priority_score": 76,
+      "confidence_score": 0.93,
+      "industry_observation": "Long-term support ended; modern Angular is maintained separately.",
+      "why_suggested": "AngularJS was detected 1 time(s) on page(s) [1]. The local scoring model assigned 76 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked High because the score is 76/100, within the 75+ priority band; lifecycle contributed 40/40, labs contributed 20/20. It appears in lab or hands-on instructional context. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked High because the score is 76/100, within the 75+ priority band; lifecycle contributed 40/40, labs contributed 20/20.",
+      "suggested_faculty_action": "Review page(s) 1 and decide whether AngularJS should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 1 and decide whether AngularJS should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Add a short faculty note or updated reference that clarifies AngularJS's current support status and points students to maintained documentation.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Compare the AngularJS example with current frontend documentation, accessibility expectations, dependency setup, and component architecture used in industry.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 1,
+          "context_text": "This module introduces browser-based application patterns. Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples.",
+          "reason": "Page 1 includes AngularJS in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow. The context is near learning outcome, assessment, or student activity language. The technology has a stronger lifecycle signal, so faculty may want to validate the support status and documentation used on that page.",
+          "review_focus": "Hands-on activity and outcome alignment",
+          "implications": [
+            "Students may rely on documentation, examples, or packages whose support status should be verified by faculty.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 40,
+          "max_points": 40,
+          "evidence": "Long-term support ended; modern Angular is maintained separately.",
+          "implication": "A high lifecycle contribution suggests faculty should validate support status, security posture, official documentation, and whether the technology is being used intentionally.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [1].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://docs.angularjs.org/",
+        "https://angular.dev/"
+      ],
+      "learning_resources": [
+        "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks",
+        "https://angular.dev/tutorials"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "This module introduces browser-based application patterns.",
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples."
+          ],
+          "context_text": "This module introduces browser-based application patterns. Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 40,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        1
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "Bootstrap 3",
+      "review_priority": "Medium",
+      "priority_score": 70,
+      "confidence_score": 0.9,
+      "industry_observation": "Older major version; modern Bootstrap versions include different layout, utility, and accessibility practices.",
+      "why_suggested": "Bootstrap 3 was detected 1 time(s) on page(s) [1]. The local scoring model assigned 70 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Medium because the score is 70/100, within the 45-74 priority band; lifecycle contributed 34/40, labs contributed 20/20. It appears in lab or hands-on instructional context. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked Medium because the score is 70/100, within the 45-74 priority band; lifecycle contributed 34/40, labs contributed 20/20.",
+      "suggested_faculty_action": "Review page(s) 1 and decide whether Bootstrap 3 should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 1 and decide whether Bootstrap 3 should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Add a short faculty note or updated reference that clarifies Bootstrap 3's current support status and points students to maintained documentation.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Check whether Bootstrap 3 examples rely on layout classes, browser assumptions, or accessibility patterns that differ from current Bootstrap guidance.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 1,
+          "context_text": "This module introduces browser-based application patterns. Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples.",
+          "reason": "Page 1 includes Bootstrap 3 in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow. The context is near learning outcome, assessment, or student activity language. The technology has a stronger lifecycle signal, so faculty may want to validate the support status and documentation used on that page.",
+          "review_focus": "Hands-on activity and outcome alignment",
+          "implications": [
+            "Students may rely on documentation, examples, or packages whose support status should be verified by faculty.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 34,
+          "max_points": 40,
+          "evidence": "Older major version; modern Bootstrap versions include different layout, utility, and accessibility practices.",
+          "implication": "A high lifecycle contribution suggests faculty should validate support status, security posture, official documentation, and whether the technology is being used intentionally.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [1].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://getbootstrap.com/docs/3.4/",
+        "https://getbootstrap.com/docs/5.3/"
+      ],
+      "learning_resources": [
+        "https://getbootstrap.com/docs/5.3/getting-started/introduction/",
+        "https://developer.mozilla.org/en-US/docs/Learn/CSS"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "This module introduces browser-based application patterns.",
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples."
+          ],
+          "context_text": "This module introduces browser-based application patterns. Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 34,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        1
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "PHP 5",
+      "review_priority": "Medium",
+      "priority_score": 56,
+      "confidence_score": 0.83,
+      "industry_observation": "Security support has ended for this major PHP line.",
+      "why_suggested": "PHP 5 was detected 1 time(s) on page(s) [2]. The local scoring model assigned 56 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Medium because the score is 56/100, within the 45-74 priority band; lifecycle contributed 40/40, activities contributed 10/10. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked Medium because the score is 56/100, within the 45-74 priority band; lifecycle contributed 40/40, activities contributed 10/10.",
+      "suggested_faculty_action": "Review page(s) 2 and decide whether PHP 5 should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 2 and decide whether PHP 5 should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Add a short faculty note or updated reference that clarifies PHP 5's current support status and points students to maintained documentation.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Confirm whether PHP 5 syntax, security assumptions, and server setup remain suitable for the intended backend competency.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 2,
+          "context_text": "Module 7: Backend and Deployment Practices Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker.",
+          "reason": "Page 2 includes PHP 5 in surrounding instructional text. The context is near learning outcome, assessment, or student activity language. The technology has a stronger lifecycle signal, so faculty may want to validate the support status and documentation used on that page.",
+          "review_focus": "Learning outcome or assessment alignment",
+          "implications": [
+            "Students may rely on documentation, examples, or packages whose support status should be verified by faculty.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 40,
+          "max_points": 40,
+          "evidence": "Security support has ended for this major PHP line.",
+          "implication": "A high lifecycle contribution suggests faculty should validate support status, security posture, official documentation, and whether the technology is being used intentionally.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [2].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No lab-oriented context was detected in the sampled sentences.",
+          "implication": "Without lab context, the review impact may be limited to examples, references, or explanatory text.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://www.php.net/releases/",
+        "https://www.php.net/supported-versions.php"
+      ],
+      "learning_resources": [
+        "https://www.php.net/manual/en/getting-started.php",
+        "https://www.php-fig.org/psr/"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "Module 7: Backend and Deployment Practices",
+            "Students will configure PHP 5 examples that connect to MySQL.",
+            "For deployment, learners will package the service with Docker."
+          ],
+          "context_text": "Module 7: Backend and Deployment Practices Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 40,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        2
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "SVN",
+      "review_priority": "Medium",
+      "priority_score": 54,
+      "confidence_score": 0.82,
+      "industry_observation": "Still available, but many modern software teams emphasize distributed version control workflows.",
+      "why_suggested": "SVN was detected 1 time(s) on page(s) [2]. The local scoring model assigned 54 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Medium because the score is 54/100, within the 45-74 priority band; lifecycle contributed 28/40, labs contributed 20/20. It appears in lab or hands-on instructional context.",
+      "priority_rationale": "It is marked Medium because the score is 54/100, within the 45-74 priority band; lifecycle contributed 28/40, labs contributed 20/20.",
+      "suggested_faculty_action": "Review page(s) 2 and decide whether SVN should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 2 and decide whether SVN should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Validate the version, support window, and documentation links for SVN before using the page in the next delivery.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Clarify whether SVN is included to teach a specific workflow, to compare version control models, or to prepare students for current team practices.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 2,
+          "context_text": "For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git. Faculty validation is required before any curriculum decision is made.",
+          "reason": "Page 2 includes SVN in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow.",
+          "review_focus": "Lab workflow, setup steps, commands, and assessment friction",
+          "implications": [
+            "Version-specific instructions may need confirmation against current official guidance.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 28,
+          "max_points": 40,
+          "evidence": "Still available, but many modern software teams emphasize distributed version control workflows.",
+          "implication": "A moderate lifecycle contribution suggests version support and documentation should be checked before reuse.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [2].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning-activity context was detected in the sampled sentences.",
+          "implication": "Without activity context, faculty can usually review the reference without changing the assessment design.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://subversion.apache.org/docs/"
+      ],
+      "learning_resources": [
+        "https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control",
+        "https://docs.github.com/en/get-started/using-git/about-git"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "For deployment, learners will package the service with Docker.",
+            "A learning activity asks students to document version control with SVN and Git.",
+            "Faculty validation is required before any curriculum decision is made."
+          ],
+          "context_text": "For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git. Faculty validation is required before any curriculum decision is made.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 28,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        2
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "Vue",
+      "review_priority": "Low",
+      "priority_score": 43,
+      "confidence_score": 0.77,
+      "industry_observation": "Actively maintained frontend framework.",
+      "why_suggested": "Vue was detected 1 time(s) on page(s) [1]. The local scoring model assigned 43 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Low because the score is 43/100, within the 0-44 priority band; labs contributed 20/20, activities contributed 10/10. It appears in lab or hands-on instructional context. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked Low because the score is 43/100, within the 0-44 priority band; labs contributed 20/20, activities contributed 10/10.",
+      "suggested_faculty_action": "Review page(s) 1 and decide whether Vue should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 1 and decide whether Vue should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Keep Vue if it supports the learning outcome, but verify that examples use current documentation and setup guidance.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Compare the Vue example with current frontend documentation, accessibility expectations, dependency setup, and component architecture used in industry.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 1,
+          "context_text": "Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples. Faculty review suggested: confirm whether the chosen examples still support the target competencies.",
+          "reason": "Page 1 includes Vue in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow. The context is near learning outcome, assessment, or student activity language.",
+          "review_focus": "Hands-on activity and outcome alignment",
+          "implications": [
+            "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 7,
+          "max_points": 40,
+          "evidence": "Actively maintained frontend framework.",
+          "implication": "A low lifecycle contribution suggests the technology is not the main driver of priority; review should focus on instructional fit.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [1].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://vuejs.org/"
+      ],
+      "learning_resources": [
+        "https://vuejs.org/tutorial/",
+        "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples.",
+            "Faculty review suggested: confirm whether the chosen examples still support the target competencies."
+          ],
+          "context_text": "Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples. Faculty review suggested: confirm whether the chosen examples still support the target competencies.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 7,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        1
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "React",
+      "review_priority": "Low",
+      "priority_score": 42,
+      "confidence_score": 0.76,
+      "industry_observation": "Actively maintained UI library with broad industry adoption.",
+      "why_suggested": "React was detected 1 time(s) on page(s) [1]. The local scoring model assigned 42 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Low because the score is 42/100, within the 0-44 priority band; labs contributed 20/20, activities contributed 10/10. It appears in lab or hands-on instructional context. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked Low because the score is 42/100, within the 0-44 priority band; labs contributed 20/20, activities contributed 10/10.",
+      "suggested_faculty_action": "Review page(s) 1 and decide whether React should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 1 and decide whether React should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Keep React if it supports the learning outcome, but verify that examples use current documentation and setup guidance.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Compare the React example with current frontend documentation, accessibility expectations, dependency setup, and component architecture used in industry.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 1,
+          "context_text": "Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples. Faculty review suggested: confirm whether the chosen examples still support the target competencies.",
+          "reason": "Page 1 includes React in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow. The context is near learning outcome, assessment, or student activity language.",
+          "review_focus": "Hands-on activity and outcome alignment",
+          "implications": [
+            "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 6,
+          "max_points": 40,
+          "evidence": "Actively maintained UI library with broad industry adoption.",
+          "implication": "A low lifecycle contribution suggests the technology is not the main driver of priority; review should focus on instructional fit.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [1].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://react.dev/"
+      ],
+      "learning_resources": [
+        "https://react.dev/learn",
+        "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "Students will build a lab activity using AngularJS and Bootstrap 3.",
+            "The activity asks students to compare the interface with React and Vue examples.",
+            "Faculty review suggested: confirm whether the chosen examples still support the target competencies."
+          ],
+          "context_text": "Students will build a lab activity using AngularJS and Bootstrap 3. The activity asks students to compare the interface with React and Vue examples. Faculty review suggested: confirm whether the chosen examples still support the target competencies.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 6,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        1
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "Docker",
+      "review_priority": "Low",
+      "priority_score": 41,
+      "confidence_score": 0.76,
+      "industry_observation": "Current containerization platform; practices vary by version and deployment target.",
+      "why_suggested": "Docker was detected 1 time(s) on page(s) [2]. The local scoring model assigned 41 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Low because the score is 41/100, within the 0-44 priority band; labs contributed 20/20, activities contributed 10/10. It appears in lab or hands-on instructional context. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked Low because the score is 41/100, within the 0-44 priority band; labs contributed 20/20, activities contributed 10/10.",
+      "suggested_faculty_action": "Review page(s) 2 and decide whether Docker should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 2 and decide whether Docker should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Keep Docker if it supports the learning outcome, but verify that examples use current documentation and setup guidance.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Check whether Docker instructions still match current image build, compose, registry, and deployment practices.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 2,
+          "context_text": "Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git.",
+          "reason": "Page 2 includes Docker in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow. The context is near learning outcome, assessment, or student activity language.",
+          "review_focus": "Hands-on activity and outcome alignment",
+          "implications": [
+            "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 5,
+          "max_points": 40,
+          "evidence": "Current containerization platform; practices vary by version and deployment target.",
+          "implication": "A low lifecycle contribution suggests the technology is not the main driver of priority; review should focus on instructional fit.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [2].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://docs.docker.com/"
+      ],
+      "learning_resources": [
+        "https://docs.docker.com/get-started/",
+        "https://docs.docker.com/language/"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "Students will configure PHP 5 examples that connect to MySQL.",
+            "For deployment, learners will package the service with Docker.",
+            "A learning activity asks students to document version control with SVN and Git."
+          ],
+          "context_text": "Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 5,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        2
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "Git",
+      "review_priority": "Low",
+      "priority_score": 30,
+      "confidence_score": 0.7,
+      "industry_observation": "Current distributed version control system with broad adoption.",
+      "why_suggested": "Git was detected 1 time(s) on page(s) [2]. The local scoring model assigned 30 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Low because the score is 30/100, within the 0-44 priority band; labs contributed 20/20, frequency contributed 6/30. It appears in lab or hands-on instructional context.",
+      "priority_rationale": "It is marked Low because the score is 30/100, within the 0-44 priority band; labs contributed 20/20, frequency contributed 6/30.",
+      "suggested_faculty_action": "Review page(s) 2 and decide whether Git should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 2 and decide whether Git should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Keep Git if it supports the learning outcome, but verify that examples use current documentation and setup guidance.",
+        "Check lab instructions, package names, commands, screenshots, and grading criteria for friction students may encounter during hands-on work.",
+        "Clarify whether Git is included to teach a specific workflow, to compare version control models, or to prepare students for current team practices.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 2,
+          "context_text": "For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git. Faculty validation is required before any curriculum decision is made.",
+          "reason": "Page 2 includes Git in surrounding instructional text. The context appears connected to a lab, build task, exercise, or hands-on workflow.",
+          "review_focus": "Lab workflow, setup steps, commands, and assessment friction",
+          "implications": [
+            "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
+            "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 4,
+          "max_points": 40,
+          "evidence": "Current distributed version control system with broad adoption.",
+          "implication": "A low lifecycle contribution suggests the technology is not the main driver of priority; review should focus on instructional fit.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [2].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Detected near lab, exercise, project, build, or implementation language.",
+          "implication": "Lab context increases priority because students may need to install, configure, build, or submit work using the detected technology.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning-activity context was detected in the sampled sentences.",
+          "implication": "Without activity context, faculty can usually review the reference without changing the assessment design.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://git-scm.com/doc"
+      ],
+      "learning_resources": [
+        "https://git-scm.com/book/en/v2",
+        "https://docs.github.com/en/get-started/using-git/about-git"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "For deployment, learners will package the service with Docker.",
+            "A learning activity asks students to document version control with SVN and Git.",
+            "Faculty validation is required before any curriculum decision is made."
+          ],
+          "context_text": "For deployment, learners will package the service with Docker. A learning activity asks students to document version control with SVN and Git. Faculty validation is required before any curriculum decision is made.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 4,
+        "frequency": 6,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        2
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "MySQL",
+      "review_priority": "Low",
+      "priority_score": 24,
+      "confidence_score": 0.67,
+      "industry_observation": "Widely used relational database with version-specific support windows.",
+      "why_suggested": "MySQL was detected 1 time(s) on page(s) [2]. The local scoring model assigned 24 points based on lifecycle signals, frequency, lab context, and learning activity context. It is marked Low because the score is 24/100, within the 0-44 priority band; activities contributed 10/10, lifecycle contributed 8/40. It also appears near learning outcome or assessment language.",
+      "priority_rationale": "It is marked Low because the score is 24/100, within the 0-44 priority band; activities contributed 10/10, lifecycle contributed 8/40.",
+      "suggested_faculty_action": "Review page(s) 2 and decide whether MySQL should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+      "specific_recommendations": [
+        "Review page(s) 2 and decide whether MySQL should be taught as a current workflow, a legacy maintenance scenario, or a comparison point.",
+        "Keep MySQL if it supports the learning outcome, but verify that examples use current documentation and setup guidance.",
+        "Map the activity back to the course outcome and confirm whether the assessment should emphasize concepts, tool usage, migration awareness, or comparison with modern alternatives.",
+        "Validate MySQL examples against current SQL dialect guidance, connector setup, and deployment assumptions.",
+        "Use the sampled page context as evidence during faculty review rather than treating the score as an automatic decision."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 2,
+          "context_text": "Module 7: Backend and Deployment Practices Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker.",
+          "reason": "Page 2 includes MySQL in surrounding instructional text. The context is near learning outcome, assessment, or student activity language.",
+          "review_focus": "Learning outcome or assessment alignment",
+          "implications": [
+            "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
+            "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
+          ]
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 8,
+          "max_points": 40,
+          "evidence": "Widely used relational database with version-specific support windows.",
+          "implication": "A low lifecycle contribution suggests the technology is not the main driver of priority; review should focus on instructional fit.",
+          "review_question": "Is the page teaching this technology as a current practice, a legacy maintenance example, or a historical comparison?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Detected 1 time(s) across page(s) [2].",
+          "implication": "A single mention contributes lightly; the page is flagged mainly because of lifecycle or instructional context signals.",
+          "review_question": "Does the number of mentions indicate a passing reference or a repeated instructional dependency?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No lab-oriented context was detected in the sampled sentences.",
+          "implication": "Without lab context, the review impact may be limited to examples, references, or explanatory text.",
+          "review_question": "Would students need current tooling, installation steps, screenshots, or commands to complete this activity?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Detected near student activity, outcome, assessment, objective, or demonstration language.",
+          "implication": "Activity context increases priority because revisions could affect outcomes, rubrics, or assessment expectations.",
+          "review_question": "Does the page still measure the intended competency, or should the activity be reframed?"
+        }
+      ],
+      "official_documentation": [
+        "https://dev.mysql.com/doc/"
+      ],
+      "learning_resources": [
+        "https://dev.mysql.com/doc/refman/8.4/en/tutorial.html",
+        "https://sqlbolt.com/"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "Module 7: Backend and Deployment Practices",
+            "Students will configure PHP 5 examples that connect to MySQL.",
+            "For deployment, learners will package the service with Docker."
+          ],
+          "context_text": "Module 7: Backend and Deployment Practices Students will configure PHP 5 examples that connect to MySQL. For deployment, learners will package the service with Docker.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 8,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        2
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback"
+    }
+  ],
+  "summary": {
+    "technology_count": 9,
+    "review_candidate_count": 9,
+    "high_priority_count": 1,
+    "medium_priority_count": 3,
+    "low_priority_count": 5
+  }
+}
