@@ -18,6 +18,7 @@ import {
   X
 } from "lucide-react";
 import { analyzePdf } from "@/lib/api";
+import { MultiAgentArchitecture } from "@/components/ui/architecture-diagram";
 import type { Recommendation, ReviewPriority, ReviewReport } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -139,6 +140,10 @@ export default function Home() {
             Faculty validation required
           </Badge>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 pt-6">
+        <MultiAgentArchitecture />
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_380px]">
