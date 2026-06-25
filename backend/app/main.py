@@ -62,7 +62,21 @@ async def analyze_pdf(file: UploadFile = File(...)) -> dict:
             temp_path = temp_file.name
 
         pages = extract_pdf_pages(temp_path)
-        report = build_review_report(pages, filename=filename, file_size=len(raw))
+        
+        # Two-Tier Agentic Pipeline
+        from .services.agentic_pipeline import build_review_report_agentic
+        
+        try:
+            report = build_review_report_agentic(pages, filename=filename, file_size=len(raw))
+        except Exception as e:
+            # If the pipeline throws an HTTPException (like the Quota 429), re-raise it
+            from fastapi import HTTPException
+            if isinstance(e, HTTPException):
+                raise e
+            # Otherwise, return a clean 500 error instead of silently dropping the connection
+            print(f"Pipeline crashed: {e}")
+            raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+            
         upload_id = save_report(filename, len(raw), report)
         return {"id": upload_id, **report}
     finally:

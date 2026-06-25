@@ -18,7 +18,7 @@ import {
   X
 } from "lucide-react";
 import { analyzePdf } from "@/lib/api";
-import { MultiAgentArchitecture } from "@/components/ui/architecture-diagram";
+
 import type { Recommendation, ReviewPriority, ReviewReport } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -44,6 +44,7 @@ export default function Home() {
   const [stage, setStage] = useState<Stage>("idle");
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<ReviewReport | null>(null);
+  const [debugPages, setDebugPages] = useState<any[] | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<FilterValue>("All");
   const [query, setQuery] = useState("");
 
@@ -86,13 +87,18 @@ export default function Home() {
 
     setError(null);
     setReport(null);
+    setDebugPages(null);
     setStage("uploading");
     const extractTimer = window.setTimeout(() => setStage("extracting"), 450);
     const analysisTimer = window.setTimeout(() => setStage("analyzing"), 950);
 
     try {
-      const result = await analyzePdf(file);
-      setReport(result);
+      const result = await analyzePdf(file) as any;
+      if (result.debug_pages) {
+        setDebugPages(result.debug_pages);
+      } else {
+        setReport(result);
+      }
       setStage("complete");
     } catch (analysisError) {
       setStage("error");
@@ -140,10 +146,6 @@ export default function Home() {
             Faculty validation required
           </Badge>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 pt-6">
-        <MultiAgentArchitecture />
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_380px]">
@@ -300,6 +302,55 @@ export default function Home() {
                 key={`${recommendation.technology}-${recommendation.review_priority}`}
                 recommendation={recommendation}
               />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {debugPages && (
+        <section className="mx-auto max-w-7xl px-5 pb-8">
+          <div className="rounded-md border border-amber-200 bg-amber-50 p-4 mb-4">
+            <h2 className="text-lg font-bold text-amber-800">Debug: Extracted Pages</h2>
+            <p className="text-sm text-amber-700">Displaying raw text and images from PyMuPDF. Analysis is temporarily bypassed.</p>
+          </div>
+          <div className="grid gap-4">
+            {debugPages.map((pageData: any, idx: number) => (
+              <div key={idx} className="rounded-md border border-border bg-white p-4">
+                <h3 className="font-semibold border-b pb-2 mb-3">Page {pageData.page}</h3>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="text-sm font-semibold text-muted-foreground mb-2">Extracted Text</h4>
+                    <div className="bg-muted p-3 rounded text-sm whitespace-pre-wrap max-h-60 overflow-y-auto">
+                      {pageData.text || <span className="text-muted-foreground italic">No text found</span>}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-semibold text-muted-foreground mb-2">
+                      Extracted Images ({pageData.images?.length || 0})
+                    </h4>
+                    {pageData.images?.length > 0 ? (
+                      <div className="flex flex-col gap-3">
+                        {pageData.images.map((imgBase64: string, imgIdx: number) => (
+                          <div key={imgIdx} className="border border-border p-2 rounded bg-slate-50 flex flex-col items-center">
+                            <span className="text-xs text-muted-foreground mb-1">Image {imgIdx + 1}</span>
+                            <img 
+                              src={`data:image/png;base64,${imgBase64}`} 
+                              alt={`Page ${pageData.page} Image ${imgIdx + 1}`} 
+                              className="max-w-full max-h-48 object-contain"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="bg-muted p-3 rounded text-sm text-muted-foreground italic">
+                        No images found on this page
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </section>
