@@ -61,8 +61,7 @@ async def analyze_pdf(file: UploadFile = File(...)) -> dict:
             temp_file.write(raw)
             temp_path = temp_file.name
 
-        pages = extract_pdf_pages(temp_path)
-        report = build_review_report(pages, filename=filename, file_size=len(raw))
+        report = build_review_report(temp_path, filename=filename, file_size=len(raw))
         upload_id = save_report(filename, len(raw), report)
         return {"id": upload_id, **report}
     finally:

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, DragEvent, useMemo, useRef, useState } from "react";
+import { ChangeEvent, DragEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
   BookOpen,
@@ -42,6 +42,11 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [stage, setStage] = useState<Stage>("idle");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<ReviewReport | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<FilterValue>("All");
@@ -188,7 +193,7 @@ export default function Home() {
             </div>
 
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-              <Button onClick={runAnalysis} disabled={!file || stage === "uploading" || stage === "extracting" || stage === "analyzing"}>
+              <Button onClick={runAnalysis} disabled={!mounted || !file || stage === "uploading" || stage === "extracting" || stage === "analyzing"}>
                 {stage === "uploading" || stage === "extracting" || stage === "analyzing" ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
