@@ -52,12 +52,12 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                     )
                 print(f"  Agent 1 skipped page {page['page']} due to error: {e}")
                 
-        # If Agent 1 found tech OR if the page has valid images (diagrams), flag it as a candidate
-        if found_techs or images:
+        # Text-only branch: Flag only if Agent 1 found text-based tech
+        if found_techs:
             candidate_pages.append({
                 "page": page["page"],
                 "text": text,
-                "images": images,
+                "images": [],
                 "techs": found_techs
             })
 
@@ -69,7 +69,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
     
     if candidate_pages:
         contents = [
-            "You are an expert curriculum reviewer. Analyze the following pages from a module. Look at both the text and the provided images. "
+            "You are an expert curriculum reviewer. Analyze the following text extracted from a module. "
             "Identify technologies, evaluate if they are outdated, and provide actionable recommendations. \n"
             "IMPORTANT SCORING RUBRIC:\n"
             "1. Calculate the 'priority_score' (0-100) strictly by adding the following sub-scores in 'score_breakdown':\n"
@@ -77,7 +77,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             "   - 'frequency' (0-20 pts): Higher if the technology appears heavily across the module.\n"
             "   - 'appears_in_labs' + 'appears_in_learning_activities' (0-40 pts combined): Max points if students are actively graded or practicing it.\n"
             "2. Set the 'review_priority' using these strict thresholds: 80-100='High', 50-79='Medium', 0-49='Low'.\n"
-            "3. Assign a 'confidence_score' (0.0-1.0) based solely on your certainty of the visual/textual evidence.\n"
+            "3. Assign a 'confidence_score' (0.0-1.0) based solely on your certainty of the textual evidence.\n"
             "Output ONLY a JSON array of Recommendation objects matching the requested schema."
         ]
         
@@ -105,15 +105,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             if next_text:
                 contents.append(f"[Next Context - Page {cp['page'] + 1} Text]:\n{next_text[:2000]}") # Cap length
             
-            for img_b64 in cp['images']:
-                try:
-                    img_bytes = base64.b64decode(img_b64)
-                    # We pass the raw bytes to Gemini API as an image part
-                    contents.append(
-                        types.Part.from_bytes(data=img_bytes, mime_type='image/png')
-                    )
-                except Exception as e:
-                    print(f"Could not load image on page {cp['page']}: {e}")
+            # Image loading removed for text-only safety branch
                     
         # Define the strict JSON schema that matches our React Frontend
         schema = {
