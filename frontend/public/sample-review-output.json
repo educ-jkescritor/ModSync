@@ -16,13 +16,6 @@
         "Update the diagram on Page 12 to show unidirectional data flow (React) or modern Angular component trees.",
         "Rewrite the 'Setting up the App' lab on Page 14 to use Vite instead of 'npm install angular@1.6'."
       ],
-      "official_documentation": [
-        "https://react.dev/learn",
-        "https://angular.dev/overview"
-      ],
-      "learning_resources": [
-        "https://frontendmasters.com/courses/complete-react-v8/"
-      ],
       "faculty_validation_required": false,
       "score_breakdown": {
         "technology_lifecycle_risk": 40,
@@ -30,9 +23,22 @@
         "appears_in_labs": 25,
         "appears_in_learning_activities": 15
       },
-      "pages": [12, 14, 15, 22, 23],
+      "pages": [
+        12,
+        14,
+        15,
+        22,
+        23
+      ],
       "frequency": 18,
-      "ai_mode": "Gemini 1.5 Flash (Agentic Pipeline)"
+      "ai_mode": "Gemini 1.5 Flash (Agentic Pipeline)",
+      "current_technology_references": [
+        "https://react.dev/learn",
+        "https://angular.dev/overview"
+      ],
+      "new_technology_references": [
+        "https://frontendmasters.com/courses/complete-react-v8/"
+      ]
     },
     {
       "technology": "Subversion (SVN)",
@@ -47,10 +53,6 @@
         "Change the 'Version Control' section on Page 5 from SVN to Git.",
         "Update the team project guidelines to require a shared GitHub or GitLab repository."
       ],
-      "official_documentation": [
-        "https://git-scm.com/doc"
-      ],
-      "learning_resources": [],
       "faculty_validation_required": true,
       "score_breakdown": {
         "technology_lifecycle_risk": 35,
@@ -58,9 +60,17 @@
         "appears_in_labs": 0,
         "appears_in_learning_activities": 30
       },
-      "pages": [5, 6, 7],
+      "pages": [
+        5,
+        6,
+        7
+      ],
       "frequency": 5,
-      "ai_mode": "Gemini 1.5 Flash (Agentic Pipeline)"
+      "ai_mode": "Gemini 1.5 Flash (Agentic Pipeline)",
+      "current_technology_references": [
+        "https://git-scm.com/doc"
+      ],
+      "new_technology_references": []
     },
     {
       "technology": "jQuery",
@@ -74,10 +84,6 @@
       "specific_recommendations": [
         "Replace the jQuery `$` syntax example on Page 38 with standard ES6 `document.querySelector`."
       ],
-      "official_documentation": [
-        "https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"
-      ],
-      "learning_resources": [],
       "faculty_validation_required": false,
       "score_breakdown": {
         "technology_lifecycle_risk": 20,
@@ -85,16 +91,22 @@
         "appears_in_labs": 0,
         "appears_in_learning_activities": 20
       },
-      "pages": [38],
+      "pages": [
+        38
+      ],
       "frequency": 2,
-      "ai_mode": "Gemini 1.5 Flash (Agentic Pipeline)"
+      "ai_mode": "Gemini 1.5 Flash (Agentic Pipeline)",
+      "current_technology_references": [
+        "https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"
+      ],
+      "new_technology_references": []
     }
   ],
   "summary": {
     "technology_count": 3,
-    "review_candidate_count": 3,
     "high_priority_count": 1,
     "medium_priority_count": 1,
-    "low_priority_count": 1
+    "low_priority_count": 1,
+    "relevant_pages_count": 3
   }
 }

@@ -35,57 +35,82 @@ Return JSON only."""
 
 
 def analyze_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
-    # api_key = os.getenv("OPENAI_API_KEY")
-    gemini_api_key = os.getenv("GEMINI_API_KEY")
+    openai_key = os.getenv("OPENAI_API_KEY")
+    gemini_key = os.getenv("GEMINI_API_KEY")
     local = local_recommendation(candidate)
     
-    # if not api_key:
-    if not gemini_api_key:
-        print("Warning: GEMINI_API_KEY not found in environment. Using local fallback.")
+    if not openai_key and not gemini_key:
+        print("Warning: Neither OPENAI_API_KEY nor GEMINI_API_KEY found. Using local fallback.")
         return apply_language_guardrails(local)
 
     try:
-        # from openai import OpenAI
+        from openai import OpenAI
         from google import genai
         from google.genai import types
 
-        # client = OpenAI(api_key=api_key)
-        client = genai.Client(api_key=gemini_api_key)
+        openai_client = OpenAI(api_key=openai_key) if openai_key else None
+        gemini_client = genai.Client(api_key=gemini_key) if gemini_key else None
         
-        # model = os.getenv("OPENAI_MODEL", "gpt-4o")
-        model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-        
-        print(f"Sending request to Gemini ({model}) for {candidate['technology']}...")
-        
-        # response = client.chat.completions.create(...)
-        response = client.models.generate_content(
-            model=model,
-            contents=[
-                SYSTEM_PROMPT + "\n\n" + json.dumps(candidate, ensure_ascii=False)
-            ],
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.2,
-            )
-        )
-        
-        # content = response.choices[0].message.content or "{}"
-        content = response.text or "{}"
-        parsed = json.loads(content)
-        
-        for key, value in local.items():
-            parsed.setdefault(key, value)
-        
-        parsed["ai_mode"] = model
-        print(f"Successfully received Gemini analysis for {candidate['technology']}.")
-        return apply_language_guardrails(parsed)
-    except Exception as exc:
-        print(f"Gemini API failed for {candidate['technology']}: {exc}")
+        models_to_try = []
+        if openai_key:
+            models_to_try.extend(["gpt-4o-mini", "gpt-4o"])
+        if gemini_key:
+            models_to_try.extend(["gemini-3.1-flash-lite", "gemini-3.1-pro-preview", "gemini-3.5-flash", "gemini-2.5-flash"])
+            
+        parsed = None
+        last_exc = None
+        for model in models_to_try:
+            print(f"Sending request to AI provider ({model}) for {candidate['technology']}...")
+            try:
+                if model.startswith("gpt-"):
+                    response = openai_client.chat.completions.create(
+                        model=model,
+                        messages=[
+                            {"role": "system", "content": SYSTEM_PROMPT},
+                            {"role": "user", "content": json.dumps(candidate, ensure_ascii=False)}
+                        ],
+                        response_format={"type": "json_object"},
+                        temperature=0.2,
+                    )
+                    content = response.choices[0].message.content or "{}"
+                else:
+                    gemini_prompt = SYSTEM_PROMPT + "\n\n" + json.dumps(candidate, ensure_ascii=False)
+                    response = gemini_client.models.generate_content(
+                        model=model,
+                        contents=gemini_prompt,
+                        config=types.GenerateContentConfig(
+                            response_mime_type="application/json",
+                            temperature=0.2,
+                        )
+                    )
+                    content = response.text or "{}"
+                
+                parsed = json.loads(content)
+                
+                for key, value in local.items():
+                    parsed.setdefault(key, value)
+                
+                parsed["ai_mode"] = model
+                print(f"Successfully received analysis for {candidate['technology']} via {model}.")
+                return apply_language_guardrails(parsed)
+            except Exception as exc:
+                error_msg = str(exc).lower()
+                print(f"Model {model} failed with {error_msg}, trying next...")
+                last_exc = exc
+                continue
+                    
+        print(f"All AI API providers failed for {candidate['technology']}: {last_exc}")
         recommendation = local
         recommendation["ai_mode"] = "local_fallback"
-        recommendation["fallback_reason"] = f"Gemini analysis was unavailable: {exc}"
+        recommendation["fallback_reason"] = f"AI analysis was unavailable: {last_exc}"
         return apply_language_guardrails(recommendation)
-
+        
+    except Exception as outer_exc:
+        print(f"Critical AI API initialization or execution failure: {outer_exc}")
+        recommendation = local
+        recommendation["ai_mode"] = "local_fallback"
+        recommendation["fallback_reason"] = f"AI API init failure: {outer_exc}"
+        return apply_language_guardrails(recommendation)
 
 def local_recommendation(candidate: dict[str, Any]) -> dict[str, Any]:
     technology = candidate["technology"]
@@ -96,12 +121,12 @@ def local_recommendation(candidate: dict[str, Any]) -> dict[str, Any]:
     
     lab_phrase = (
         " Since it appears in hands-on labs or exercises, students may encounter blockers if the tooling or setup is not current."
-        if candidate["appears_in_labs"]
+        if candidate.get("appears_in_labs", False)
         else ""
     )
     learning_phrase = (
         " Its proximity to learning outcomes suggests that any changes to this technology could require adapting the assessment rubrics."
-        if candidate["appears_in_learning_activities"]
+        if candidate.get("appears_in_learning_activities", False)
         else ""
     )
     
@@ -134,8 +159,8 @@ def local_recommendation(candidate: dict[str, Any]) -> dict[str, Any]:
         "specific_recommendations": specific_recommendations,
         "page_review_reasons": page_review_reasons,
         "explainability": explainability,
-        "official_documentation": candidate["official_documentation"],
-        "learning_resources": candidate["learning_resources"],
+        "current_technology_references": candidate.get("current_technology_references", []),
+        "new_technology_references": candidate.get("new_technology_references", []),
         "faculty_validation_required": True,
         "sample_contexts": candidate["sample_contexts"],
         "score_breakdown": candidate["score_breakdown"],
