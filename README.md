@@ -15,14 +15,14 @@ Our engine (`agentic_pipeline.py`) is built to be fast, mathematically accurate,
 1. **Agent 1 (The Scout):** Rapidly scans the PDF text and images to extract a raw list of technologies, frameworks, and tools.
 2. **Agent 2 (The Super Analyst):** Evaluates the lifecycle risk of the extracted tools using strict mathematical constraints. Simultaneously, it generates a comprehensive Migration Strategy (comparing deprecated contexts vs. modern equivalents).
 3. **Dual-Multimodal Processing:** Uses `PyMuPDF` and `PIL` to extract actual screenshots, architecture diagrams, and logos from the curriculum PDF. These images are converted to Base64 and evaluated directly by the LLMs.
-4. **Resilient Fallback Loop:** The system defaults to **OpenAI**. If rate limits or quota errors occur, the backend gracefully catches the crash and instantly reroutes the exact same multimodal payload to **Google Gemini** without the user ever noticing.
+4. **Resilient Fallback Loop:** The system defaults to **OpenAI**. If rate limits or quota errors occur, the backend gracefully catches the crash and instantly reroutes the exact same multimodal payload to other **OpenAI models** (such as GPT-4o-mini or GPT-4o) without the user ever noticing.
 5. **Programmatic Math Overrides:** To prevent LLM "hallucinations" on scoring, Agent 2 is restricted by strict JSON schemas. The final 100-point priority score is intercepted and mathematically recalculated by Python, ensuring 100% accurate results.
 
 ---
 
 ## 🤖 AI Usage Disclosure
 
-*   **Core Product Engine:** We integrated **OpenAI (GPT-4o)** and **Google Gemini** APIs to create the multi-agent curriculum reviewer. We engineered the resilient fallback loop and multimodal integration natively.
+*   **Core Product Engine:** We integrated **OpenAI (GPT-4o)** and other **OpenAI models** APIs to create the multi-agent curriculum reviewer. We engineered the resilient fallback loop and multimodal integration natively.
 *   **AI Pair Programming:** We heavily utilized **Google Antigravity** as our AI Pair Programmer to accelerate prototyping. Antigravity helped architect the Python backend, refactor the Next.js frontend UI layouts, surgically merge branch features (Migration UI), and debug complex Python scope errors (`UnboundLocalError`).
 *   **Testing & Validation:** Conversational LLMs (Claude/ChatGPT) were used to generate highly specific, multi-disciplinary "mock syllabi" designed to stress-test our system with deliberate edge cases.
 
@@ -33,7 +33,7 @@ Our engine (`agentic_pipeline.py`) is built to be fast, mathematically accurate,
 *   **Frontend:** Next.js, React, TypeScript, TailwindCSS, `lucide-react`
 *   **Backend:** FastAPI, Python, SQLite
 *   **PDF Processing:** `PyMuPDF` (primary path for text and image blob extraction), `PIL` (Image processing)
-*   **AI SDKs:** `openai`, `google-genai`
+*   **AI SDKs:** `openai`
 
 ---
 
@@ -48,9 +48,8 @@ copy .env.example .env
 Edit the `.env` file and add your keys:
 ```env
 OPENAI_API_KEY="sk-..."
-GEMINI_API_KEY="AIza..."
 ```
-*(Note: At least one key is required. Providing both enables the Resilient Fallback Engine).*
+*(Note: An OpenAI API key is required to connect to the LLM backend for processing).*
 
 ### 2. Run the Backend (FastAPI)
 ```powershell
