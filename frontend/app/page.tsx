@@ -266,7 +266,7 @@ export default function Home() {
         <section className="mx-auto max-w-7xl px-5 pb-8">
           <div className="mb-5 grid gap-3 md:grid-cols-4">
             <SummaryTile label="Technologies" value={report.summary.technology_count} />
-            <SummaryTile label="Review candidates" value={report.summary.review_candidate_count} />
+            <SummaryTile label="Relevant pages" value={report.summary.relevant_pages_count} />
             <SummaryTile label="High priority" value={report.summary.high_priority_count} tone="high" />
             <SummaryTile label="Pages analyzed" value={report.pages_analyzed} />
           </div>
@@ -392,17 +392,17 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
 
   return (
     <Card>
-      <CardHeader className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-        <div>
+      <CardHeader className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <CardTitle className="text-lg">{recommendation.technology}</CardTitle>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Found on {recommendation.pages.length === 1 ? "page" : "pages"} {recommendation.pages.join(", ")} ({recommendation.frequency} total mentions)
-          </p>
+          <div className="flex flex-wrap shrink-0 gap-2">
+            <Badge tone={tone}>{recommendation.review_priority} priority</Badge>
+            <Badge tone="neutral">{Math.round(recommendation.confidence_score * 100)}% confidence</Badge>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Badge tone={tone}>{recommendation.review_priority} priority</Badge>
-          <Badge tone="neutral">{Math.round(recommendation.confidence_score * 100)}% confidence</Badge>
-        </div>
+        <p className="text-sm leading-6 text-muted-foreground break-words">
+          Found on {recommendation.pages.length === 1 ? "page" : "pages"} {recommendation.pages.join(", ")} ({recommendation.frequency} total mentions)
+        </p>
       </CardHeader>
       <CardContent>
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.8fr)]">
@@ -427,8 +427,8 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
 
           <div className="space-y-4">
             <ScoreBreakdown recommendation={recommendation} />
-            <ResourceList title="Official documentation" links={recommendation.official_documentation} />
-            <ResourceList title="Learning resources" links={recommendation.learning_resources} />
+            <ResourceList title={`Current references for ${recommendation.technology}`} links={recommendation.current_technology_references} />
+            <ResourceList title="New suggested references" links={recommendation.new_technology_references} />
           </div>
         </div>
       </CardContent>
@@ -550,7 +550,8 @@ function EvidenceAndContext({ recommendation }: { recommendation: Recommendation
 
 
 
-function ResourceList({ title, links }: { title: string; links: string[] }) {
+function ResourceList({ title, links }: { title: string; links?: string[] }) {
+  if (!links || links.length === 0) return null;
   return (
     <div>
       <h3 className="text-sm font-semibold">{title}</h3>

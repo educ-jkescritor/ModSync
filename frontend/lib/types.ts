@@ -29,8 +29,8 @@ export type Recommendation = {
   specific_recommendations?: string[];
   page_review_reasons?: PageReviewReason[];
   explainability?: ExplainabilityItem[];
-  official_documentation: string[];
-  learning_resources: string[];
+  current_technology_references: string[];
+  new_technology_references: string[];
   faculty_validation_required: boolean;
   sample_contexts: {
     page: number;
@@ -58,7 +58,7 @@ export type ReviewReport = {
   recommendations: Recommendation[];
   summary: {
     technology_count: number;
-    review_candidate_count: number;
+    relevant_pages_count: number;
     high_priority_count: number;
     medium_priority_count: number;
     low_priority_count: number;
