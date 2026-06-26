@@ -8,6 +8,7 @@ from .gemini_client import get_gemini_client, get_gemini_model
 from ..agents.extraction_agent import extract_page_contents
 from ..agents.validation_agent import validate_concepts
 from ..agents.recommendation_agent import generate_recommendations
+from ..agents.migration_agent import generate_migration_plan
 from .language_guardrails import apply_language_guardrails
 
 # For backward compatibility with the test suite (old list of page dicts)
@@ -16,6 +17,26 @@ from .metadata_builder import build_metadata
 from .openai_review import analyze_candidate
 from .scoring import score_candidates
 from .technology_detection import detect_technologies
+
+
+import uuid
+
+def save_pdf_page_images(pdf_path: str | Path) -> tuple[str, list[bytes]]:
+    upload_uuid = str(uuid.uuid4())
+    static_dir = Path(__file__).resolve().parents[1] / "static" / upload_uuid
+    static_dir.mkdir(parents=True, exist_ok=True)
+    
+    page_images = []
+    try:
+        from .pdf_to_images import convert_pdf_to_images
+        page_images = convert_pdf_to_images(pdf_path)
+        for idx, img_bytes in enumerate(page_images, start=1):
+            img_path = static_dir / f"page_{idx}.png"
+            img_path.write_bytes(img_bytes)
+    except Exception as exc:
+        print(f"Error saving PDF page images: {exc}")
+        
+    return upload_uuid, page_images
 
 
 def build_review_report(
@@ -36,27 +57,35 @@ def build_review_report(
     gemini_api_key = os.getenv("GEMINI_API_KEY")
     if not gemini_api_key:
         print("Warning: GEMINI_API_KEY not found in environment. Falling back to offline text-based parsing.")
+        upload_uuid, _ = save_pdf_page_images(pdf_path_or_pages)
         from .pdf_parser import extract_pdf_pages
         pages = extract_pdf_pages(pdf_path_or_pages)
-        return _build_old_report(pages, filename, file_size)
+        return _build_old_report(pages, filename, file_size, upload_uuid)
 
     try:
         return _build_multimodal_report(pdf_path_or_pages, filename, file_size)
     except Exception as exc:
         print(f"Error in multimodal report: {exc}. Falling back to offline text-based parsing.")
+        upload_uuid, _ = save_pdf_page_images(pdf_path_or_pages)
         from .pdf_parser import extract_pdf_pages
         pages = extract_pdf_pages(pdf_path_or_pages)
-        return _build_old_report(pages, filename, file_size)
+        return _build_old_report(pages, filename, file_size, upload_uuid)
 
 
 def _build_old_report(
-    pages: list[dict[str, Any]], filename: str | None = None, file_size: int | None = None
+    pages: list[dict[str, Any]], filename: str | None = None, file_size: int | None = None, upload_uuid: str | None = None
 ) -> dict[str, Any]:
     detections = detect_technologies(pages)
     contexts = extract_contexts(pages, detections)
     metadata = build_metadata(detections, contexts)
     candidates = score_candidates(metadata)
     recommendations = [analyze_candidate(candidate) for candidate in candidates]
+
+    if upload_uuid:
+        for rec in recommendations:
+            if "page_review_reasons" in rec:
+                for reason in rec["page_review_reasons"]:
+                    reason["image_url"] = f"/static/{upload_uuid}/page_{reason['page']}.png"
 
     return {
         "filename": filename,
@@ -89,8 +118,8 @@ def _build_multimodal_report(
     client = get_gemini_client()
     model = get_gemini_model()
 
-    # 1. Convert PDF pages to PNG images
-    page_images = convert_pdf_to_images(pdf_path)
+    # 1. Convert PDF pages to PNG images and save them statically
+    upload_uuid, page_images = save_pdf_page_images(pdf_path)
 
     # 2. Extract contents page-by-page using the Multimodal Extraction Agent
     import time
@@ -220,10 +249,20 @@ def _build_multimodal_report(
                     "context_text": p.context_text,
                     "reason": p.reason,
                     "review_focus": p.review_focus,
-                    "implications": p.implications
+                    "implications": p.implications,
+                    "image_url": f"/static/{upload_uuid}/page_{p.page}.png"
                 }
                 for p in item.page_review_reasons
             ]
+
+            # Run Migration Agent to generate guides and code snippets
+            migration_plan = generate_migration_plan(
+                client=client,
+                model=model,
+                technology=tech,
+                status=status,
+                suggested_action=item.suggested_faculty_action
+            )
 
             recommendations.append({
                 "technology": tech,
@@ -249,7 +288,12 @@ def _build_multimodal_report(
                 },
                 "pages": page_nums,
                 "frequency": len(page_nums),
-                "ai_mode": model
+                "ai_mode": model,
+                "migration_guide": migration_plan.migration_guide,
+                "migration_legacy_code": migration_plan.legacy_example,
+                "migration_modern_code": migration_plan.modern_example,
+                "migration_rationale_why_deprecated": migration_plan.why_deprecated,
+                "migration_rationale_modern_benefits": migration_plan.modern_benefits
             })
     else:
         # Fallback if Recommendation Agent didn't produce anything
@@ -279,7 +323,8 @@ def _build_multimodal_report(
                     "context_text": occ["evidence"],
                     "reason": reason_text,
                     "review_focus": occ["role"],
-                    "implications": [f"This concept is flagged as {status}."]
+                    "implications": [f"This concept is flagged as {status}."],
+                    "image_url": f"/static/{upload_uuid}/page_{occ['page']}.png"
                 })
                 sample_contexts.append({
                     "page": occ["page"],
@@ -351,7 +396,12 @@ def _build_multimodal_report(
                 },
                 "pages": page_nums,
                 "frequency": len(page_nums),
-                "ai_mode": model
+                "ai_mode": model,
+                "migration_guide": f"1. Identify references to {tech}.\n2. Update to a supported alternative.",
+                "migration_legacy_code": f"# Outdated usage of {tech}",
+                "migration_modern_code": "# Modern equivalent approach",
+                "migration_rationale_why_deprecated": f"The use of {tech} is outdated and no longer aligns with modern industrial standards or security support practices.",
+                "migration_rationale_modern_benefits": "Upgrading to a modern replacement improves safety, compiler/environment support, and student readiness for current industry roles."
             })
 
     # 7. Construct detections to return and save in DB

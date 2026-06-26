@@ -12,8 +12,9 @@ except ImportError:
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
-from .database import init_db, save_report
+from .database import init_db, save_report, save_feedback
 from .services.pdf_parser import extract_pdf_pages
 from .services.report_pipeline import build_review_report
 
@@ -31,6 +32,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+static_dir = Path(__file__).resolve().parent / "static"
+static_dir.mkdir(parents=True, exist_ok=True)
+app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
 
 @app.on_event("startup")
@@ -67,4 +72,30 @@ async def analyze_pdf(file: UploadFile = File(...)) -> dict:
     finally:
         if temp_path:
             Path(temp_path).unlink(missing_ok=True)
+
+
+from pydantic import BaseModel
+
+
+class FeedbackPayload(BaseModel):
+    upload_id: int | None = None
+    technology: str
+    decision: str
+    faculty_rationale: str | None = None
+    original_recommendation: str
+
+@app.post("/api/feedback")
+def submit_feedback(payload: FeedbackPayload) -> dict[str, str]:
+    try:
+        save_feedback(
+            upload_id=payload.upload_id,
+            technology=payload.technology,
+            decision=payload.decision,
+            rationale=payload.faculty_rationale,
+            original_recommendation=payload.original_recommendation
+        )
+        return {"status": "success", "message": "Feedback recorded successfully."}
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
 

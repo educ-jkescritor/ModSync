@@ -15,6 +15,7 @@ export type PageReviewReason = {
   reason: string;
   review_focus: string;
   implications: string[];
+  image_url?: string;
 };
 
 export type Recommendation = {
@@ -48,6 +49,11 @@ export type Recommendation = {
   pages: number[];
   frequency: number;
   ai_mode: string;
+  migration_guide?: string;
+  migration_legacy_code?: string;
+  migration_modern_code?: string;
+  migration_rationale_why_deprecated?: string;
+  migration_rationale_modern_benefits?: string;
 };
 
 export type ReviewReport = {
