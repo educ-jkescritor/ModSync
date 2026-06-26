@@ -1,0 +1,1500 @@
+{
+  "filename": "M3 MAIN-The Theory of Congruences.pdf",
+  "file_size": 2321009,
+  "pages_analyzed": 68,
+  "detections": [
+    {
+      "technology": "Number Theory",
+      "alias": "Number Theory",
+      "page": 1,
+      "start": 0,
+      "end": 13,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Theory of Congruences",
+      "alias": "Theory of Congruences",
+      "page": 2,
+      "start": 0,
+      "end": 25,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Theory of Congruences",
+      "alias": "Theory of Congruences",
+      "page": 5,
+      "start": 0,
+      "end": 21,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "congruences",
+      "alias": "congruences",
+      "page": 4,
+      "start": 0,
+      "end": 55,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "residue classes",
+      "alias": "residue classes",
+      "page": 4,
+      "start": 0,
+      "end": 55,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "least residues",
+      "alias": "least residues",
+      "page": 4,
+      "start": 0,
+      "end": 55,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "modular arithmetic",
+      "alias": "modular arithmetic",
+      "page": 4,
+      "start": 0,
+      "end": 70,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Congruences",
+      "alias": "Congruences",
+      "page": 5,
+      "start": 0,
+      "end": 27,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Arithmetic of remainders",
+      "alias": "Arithmetic of remainders",
+      "page": 5,
+      "start": 0,
+      "end": 38,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Divisibility questions",
+      "alias": "Divisibility questions",
+      "page": 5,
+      "start": 0,
+      "end": 37,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Carl Friedrich Gauss",
+      "alias": "Carl Friedrich Gauss",
+      "page": 5,
+      "start": 0,
+      "end": 42,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "1801",
+      "alias": "1801",
+      "page": 5,
+      "start": 0,
+      "end": 42,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Symbol '\u2261' for congruence",
+      "alias": "Symbol '\u2261' for congruence",
+      "page": 5,
+      "start": 0,
+      "end": 43,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Congruent",
+      "alias": "Congruent",
+      "page": 5,
+      "start": 0,
+      "end": 144,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Incongruent",
+      "alias": "Incongruent",
+      "page": 5,
+      "start": 0,
+      "end": 144,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    },
+    {
+      "technology": "Gauss's Definition of Congruence",
+      "alias": "Gauss's Definition of Congruence",
+      "page": 5,
+      "start": 0,
+      "end": 166,
+      "category": "Technology",
+      "lifecycle_risk": 10
+    }
+  ],
+  "recommendations": [
+    {
+      "technology": "Number Theory",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Number Theory is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Number Theory remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Number Theory should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 1,
+          "context_text": "NUMBER THEORY",
+          "reason": "Review references to Number Theory on page 1, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_1.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 1,
+          "context": [
+            "NUMBER THEORY"
+          ],
+          "context_text": "NUMBER THEORY",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        1
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Number Theory.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Number Theory",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Theory of Congruences",
+      "review_priority": "Low",
+      "priority_score": 12,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Theory of Congruences is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 12/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Theory of Congruences remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Theory of Congruences should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 2,
+          "context_text": "The Theory of Congruences",
+          "reason": "Review references to Theory of Congruences on page 2, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_2.png"
+        },
+        {
+          "page": 5,
+          "context_text": "Theory of Congruences",
+          "reason": "Review references to Theory of Congruences on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 12,
+          "max_points": 30,
+          "evidence": "Found across 2 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 2,
+          "context": [
+            "The Theory of Congruences"
+          ],
+          "context_text": "The Theory of Congruences",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        },
+        {
+          "page": 5,
+          "context": [
+            "Theory of Congruences"
+          ],
+          "context_text": "Theory of Congruences",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 12,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        2,
+        5
+      ],
+      "frequency": 2,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Theory of Congruences.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Theory of Congruences",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "congruences",
+      "review_priority": "Low",
+      "priority_score": 16,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept congruences is considered Current.",
+      "why_suggested": "It is taught as a Learning Objective and is currently Current.",
+      "priority_rationale": "Scored 16/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether congruences remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether congruences should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 4,
+          "context_text": "Define congruences, residue classes and least residues.",
+          "reason": "Review references to congruences on page 4, taught as Learning Objective.",
+          "review_focus": "Learning Objective",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_4.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Taught near learning activities.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 4,
+          "context": [
+            "Define congruences, residue classes and least residues."
+          ],
+          "context_text": "Define congruences, residue classes and least residues.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        4
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to congruences.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of congruences",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "residue classes",
+      "review_priority": "Low",
+      "priority_score": 16,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept residue classes is considered Current.",
+      "why_suggested": "It is taught as a Learning Objective and is currently Current.",
+      "priority_rationale": "Scored 16/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether residue classes remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether residue classes should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 4,
+          "context_text": "Define congruences, residue classes and least residues.",
+          "reason": "Review references to residue classes on page 4, taught as Learning Objective.",
+          "review_focus": "Learning Objective",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_4.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Taught near learning activities.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 4,
+          "context": [
+            "Define congruences, residue classes and least residues."
+          ],
+          "context_text": "Define congruences, residue classes and least residues.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        4
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to residue classes.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of residue classes",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "least residues",
+      "review_priority": "Low",
+      "priority_score": 16,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept least residues is considered Current.",
+      "why_suggested": "It is taught as a Learning Objective and is currently Current.",
+      "priority_rationale": "Scored 16/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether least residues remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether least residues should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 4,
+          "context_text": "Define congruences, residue classes and least residues.",
+          "reason": "Review references to least residues on page 4, taught as Learning Objective.",
+          "review_focus": "Learning Objective",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_4.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Taught near learning activities.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 4,
+          "context": [
+            "Define congruences, residue classes and least residues."
+          ],
+          "context_text": "Define congruences, residue classes and least residues.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        4
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to least residues.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of least residues",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "modular arithmetic",
+      "review_priority": "Low",
+      "priority_score": 16,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept modular arithmetic is considered Current.",
+      "why_suggested": "It is taught as a Learning Objective and is currently Current.",
+      "priority_rationale": "Scored 16/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether modular arithmetic remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether modular arithmetic should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 4,
+          "context_text": "Demonstrate understanding of the basic concepts of modular arithmetic.",
+          "reason": "Review references to modular arithmetic on page 4, taught as Learning Objective.",
+          "review_focus": "Learning Objective",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_4.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Taught near learning activities.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 4,
+          "context": [
+            "Demonstrate understanding of the basic concepts of modular arithmetic."
+          ],
+          "context_text": "Demonstrate understanding of the basic concepts of modular arithmetic.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        4
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to modular arithmetic.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of modular arithmetic",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Congruences",
+      "review_priority": "Low",
+      "priority_score": 16,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Congruences is considered Current.",
+      "why_suggested": "It is taught as a Learning Objective and is currently Current.",
+      "priority_rationale": "Scored 16/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Congruences remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Congruences should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "Introduction to Congruences",
+          "reason": "Review references to Congruences on page 5, taught as Learning Objective.",
+          "review_focus": "Learning Objective",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Taught near learning activities.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "Introduction to Congruences"
+          ],
+          "context_text": "Introduction to Congruences",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Congruences.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Congruences",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Arithmetic of remainders",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Arithmetic of remainders is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Arithmetic of remainders remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Arithmetic of remainders should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "Also known as arithmetic of remainders",
+          "reason": "Review references to Arithmetic of remainders on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "Also known as arithmetic of remainders"
+          ],
+          "context_text": "Also known as arithmetic of remainders",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Arithmetic of remainders.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Arithmetic of remainders",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Divisibility questions",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Divisibility questions is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Divisibility questions remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Divisibility questions should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "An approach to divisibility questions",
+          "reason": "Review references to Divisibility questions on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "An approach to divisibility questions"
+          ],
+          "context_text": "An approach to divisibility questions",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Divisibility questions.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Divisibility questions",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Carl Friedrich Gauss",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Carl Friedrich Gauss is considered Current.",
+      "why_suggested": "It is taught as a Historical Context and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Carl Friedrich Gauss remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Carl Friedrich Gauss should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "Introduced by Carl Friedrich Gauss in 1801",
+          "reason": "Review references to Carl Friedrich Gauss on page 5, taught as Historical Context.",
+          "review_focus": "Historical Context",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "Introduced by Carl Friedrich Gauss in 1801"
+          ],
+          "context_text": "Introduced by Carl Friedrich Gauss in 1801",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Carl Friedrich Gauss.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Carl Friedrich Gauss",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "1801",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept 1801 is considered Current.",
+      "why_suggested": "It is taught as a Historical Context and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether 1801 remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether 1801 should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "Introduced by Carl Friedrich Gauss in 1801",
+          "reason": "Review references to 1801 on page 5, taught as Historical Context.",
+          "review_focus": "Historical Context",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "Introduced by Carl Friedrich Gauss in 1801"
+          ],
+          "context_text": "Introduced by Carl Friedrich Gauss in 1801",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to 1801.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of 1801",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Symbol '\u2261' for congruence",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Symbol '\u2261' for congruence is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Symbol '\u2261' for congruence remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Symbol '\u2261' for congruence should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "Gauss adopted the symbol '\u2261' for congruence",
+          "reason": "Review references to Symbol '\u2261' for congruence on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "Gauss adopted the symbol '\u2261' for congruence"
+          ],
+          "context_text": "Gauss adopted the symbol '\u2261' for congruence",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Symbol '\u2261' for congruence.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Symbol '\u2261' for congruence",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Congruent",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Congruent is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Congruent remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Congruent should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.",
+          "reason": "Review references to Congruent on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent."
+          ],
+          "context_text": "If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Congruent.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Congruent",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Incongruent",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Incongruent is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Incongruent remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Incongruent should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.",
+          "reason": "Review references to Incongruent on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent."
+          ],
+          "context_text": "If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Incongruent.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Incongruent",
+      "migration_modern_code": "# Modern equivalent approach"
+    },
+    {
+      "technology": "Gauss's Definition of Congruence",
+      "review_priority": "Low",
+      "priority_score": 6,
+      "confidence_score": 0.5,
+      "industry_observation": "The concept Gauss's Definition of Congruence is considered Current.",
+      "why_suggested": "It is taught as a Main Topic and is currently Current.",
+      "priority_rationale": "Scored 6/100 based on its Current status and instructional context.",
+      "suggested_faculty_action": "Evaluate whether Gauss's Definition of Congruence remains appropriate for the curriculum, or replace/update it.",
+      "specific_recommendations": [
+        "Check whether Gauss's Definition of Congruence should be updated or replaced.",
+        "Refer to official documentation and learning resources."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 5,
+          "context_text": "According to Gauss: \"If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.\"",
+          "reason": "Review references to Gauss's Definition of Congruence on page 5, taught as Main Topic.",
+          "review_focus": "Main Topic",
+          "implications": [
+            "This concept is flagged as Current."
+          ],
+          "image_url": "/static/07a1c2c4-2d6f-4d9c-ac8d-7d30d20f2414/page_5.png"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 0,
+          "max_points": 40,
+          "evidence": "Lifecycle status is Current.",
+          "implication": "Lifecycle risk dictates if the technology is EOL or legacy.",
+          "review_question": "Should this technology be updated or replaced?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 6,
+          "max_points": 30,
+          "evidence": "Found across 1 page(s).",
+          "implication": "Mentions contribute to overall review urgency.",
+          "review_question": "Does the course material reference this concept repeatedly?"
+        },
+        {
+          "factor": "Labs",
+          "points": 0,
+          "max_points": 20,
+          "evidence": "No laboratory context detected.",
+          "implication": "Hands-on usage means students will encounter blockers if tools are deprecated.",
+          "review_question": "Do the students complete exercises with this technology?"
+        },
+        {
+          "factor": "Activities",
+          "points": 0,
+          "max_points": 10,
+          "evidence": "No learning activity context detected.",
+          "implication": "Assessment or learning outcomes might need updates if changed.",
+          "review_question": "Is this concept tied to course outcomes?"
+        }
+      ],
+      "official_documentation": [],
+      "learning_resources": [],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 5,
+          "context": [
+            "According to Gauss: \"If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.\""
+          ],
+          "context_text": "According to Gauss: \"If a number n measures the difference between two numbers a and b, then a and b are said to be congruent with respect to n; if not, incongruent.\"",
+          "appears_in_lab": false,
+          "appears_in_learning_activity": false
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 0,
+        "frequency": 6,
+        "appears_in_labs": 0,
+        "appears_in_learning_activities": 0
+      },
+      "pages": [
+        5
+      ],
+      "frequency": 1,
+      "ai_mode": "gemini-2.5-flash",
+      "migration_guide": "1. Identify references to Gauss's Definition of Congruence.\n2. Update to a supported alternative.",
+      "migration_legacy_code": "# Outdated usage of Gauss's Definition of Congruence",
+      "migration_modern_code": "# Modern equivalent approach"
+    }
+  ],
+  "summary": {
+    "technology_count": 15,
+    "review_candidate_count": 15,
+    "high_priority_count": 0,
+    "medium_priority_count": 0,
+    "low_priority_count": 15
+  }
+}

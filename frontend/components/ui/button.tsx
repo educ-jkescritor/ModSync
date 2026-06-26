@@ -2,15 +2,16 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "default" | "secondary" | "ghost" | "danger";
+  variant?: "default" | "secondary" | "ghost" | "danger" | "outline";
   size?: "default" | "icon" | "sm";
 };
 
 const variants = {
-  default: "bg-primary text-primary-foreground hover:bg-teal-800",
-  secondary: "bg-muted text-foreground hover:bg-slate-200",
-  ghost: "bg-transparent text-foreground hover:bg-muted",
-  danger: "bg-danger text-white hover:bg-rose-700"
+  default: "border-transparent bg-primary text-primary-foreground hover:bg-teal-800",
+  secondary: "border-transparent bg-muted text-foreground hover:bg-slate-200",
+  ghost: "border-transparent bg-transparent text-foreground hover:bg-muted",
+  danger: "border-transparent bg-danger text-white hover:bg-rose-700",
+  outline: "border-border bg-white text-foreground hover:bg-slate-50"
 };
 
 const sizes = {
@@ -24,7 +25,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     <button
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md border border-transparent font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
         variants[variant],
         sizes[size],
         className
@@ -33,6 +34,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     />
   )
 );
+
 
 Button.displayName = "Button";
 

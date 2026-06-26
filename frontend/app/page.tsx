@@ -6,6 +6,7 @@ import {
   BookOpen,
   CheckCircle2,
   ClipboardCheck,
+  Download,
   FileSearch,
   FileText,
   Filter,
@@ -126,6 +127,21 @@ export default function Home() {
     } catch (demoError) {
       setStage("error");
       setError(demoError instanceof Error ? demoError.message : "Demo report failed to load.");
+    }
+  }
+
+  async function handleExportFinetuning() {
+    try {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+      const link = document.createElement("a");
+      link.href = `${API_BASE_URL}/api/export-finetuning`;
+      link.setAttribute("download", "modsync_finetuning_dataset.jsonl");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (e) {
+      console.error(e);
+      alert("Failed to export dataset.");
     }
   }
 
@@ -272,7 +288,7 @@ export default function Home() {
           </div>
 
           <div className="mb-5 flex flex-col gap-3 rounded-md border border-border bg-white p-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {(["All", "High", "Medium", "Low"] as FilterValue[]).map((item) => (
                 <Button
                   key={item}
@@ -284,6 +300,16 @@ export default function Home() {
                   {item}
                 </Button>
               ))}
+              <div className="h-6 w-px bg-border mx-1 hidden sm:block" />
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleExportFinetuning}
+                className="gap-2 border-primary/20 text-primary hover:bg-teal-50 hover:text-primary-dark"
+              >
+                <Download className="h-4 w-4" />
+                Export Fine-Tuning Dataset
+              </Button>
             </div>
             <div className="relative w-full md:w-80">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -301,6 +327,7 @@ export default function Home() {
               <RecommendationCard
                 key={`${recommendation.technology}-${recommendation.review_priority}`}
                 recommendation={recommendation}
+                uploadId={report.id}
               />
             ))}
           </div>
@@ -378,7 +405,13 @@ function SummaryTile({
   );
 }
 
-function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
+function RecommendationCard({
+  recommendation,
+  uploadId
+}: {
+  recommendation: Recommendation;
+  uploadId?: number;
+}) {
   const tone =
     recommendation.review_priority === "High"
       ? "high"
@@ -389,6 +422,43 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
   const priorityRationale =
     recommendation.priority_rationale ??
     `${recommendation.review_priority} priority is based on a ${recommendation.priority_score}/100 score from lifecycle, frequency, lab, and activity indicators.`;
+
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [decision, setDecision] = useState<string | null>(null);
+  const [showInput, setShowInput] = useState<boolean>(false);
+  const [rationale, setRationale] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  async function submitDecision(chosenDecision: string, finalRationale?: string) {
+    setStatus("submitting");
+    setErrorMsg(null);
+    try {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+      const res = await fetch(`${API_BASE_URL}/api/feedback`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          upload_id: uploadId ?? null,
+          technology: recommendation.technology,
+          decision: chosenDecision,
+          faculty_rationale: finalRationale || null,
+          original_recommendation: recommendation,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail ?? "Failed to save feedback.");
+      }
+      setDecision(chosenDecision);
+      setStatus("success");
+      setShowInput(false);
+    } catch (err: any) {
+      setStatus("error");
+      setErrorMsg(err.message ?? "An error occurred.");
+    }
+  }
 
   return (
     <Card>
@@ -484,6 +554,130 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
                 </div>
               </div>
             )}
+
+            {/* Faculty Human-in-the-Loop Validation */}
+            <div className="mt-6 border-t border-border pt-4">
+              {status === "success" ? (
+                <div className="rounded-md border border-teal-200 bg-teal-50/50 p-4 text-sm text-teal-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 animate-in fade-in duration-200">
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-5 w-5 text-teal-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold block">Faculty feedback recorded!</span>
+                      <p className="text-xs text-teal-700 mt-1">
+                        Status: <strong className="uppercase">{decision}</strong>
+                        {rationale && (
+                          <>
+                            <span className="mx-1.5">•</span>
+                            <span className="italic">"{rationale}"</span>
+                          </>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="text-teal-700 hover:bg-teal-100 hover:text-teal-900 self-end sm:self-center font-medium"
+                    onClick={() => setStatus("idle")}
+                  >
+                    Modify Alignment
+                  </Button>
+                </div>
+              ) : (
+                <div className="rounded-md border border-border bg-slate-50/50 p-4 shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="h-5 w-5 text-primary" />
+                    <h3 className="text-sm font-semibold text-foreground">
+                      Faculty Human-in-the-Loop Validation
+                    </h3>
+                  </div>
+                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                    Align the ModSync model. Your decision will be saved to SQLite and exported into standard JSONL datasets for subsequent fine-tuning.
+                  </p>
+
+                  {errorMsg && (
+                    <div className="mt-2.5 rounded border border-rose-200 bg-rose-50 p-2.5 text-xs text-danger font-medium">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  {showInput ? (
+                    <div className="mt-3.5 space-y-3">
+                      <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        {decision === "Modify" ? "Specify modifications & rationale" : "Specify rejection rationale (optional)"}
+                      </label>
+                      <textarea
+                        value={rationale}
+                        onChange={(e) => setRationale(e.target.value)}
+                        placeholder={decision === "Modify" ? "e.g., Use standard C++11 smart pointers instead of manual delete actions..." : "e.g., Faculty prefers teaching this legacy pattern for pedagogical reasons..."}
+                        className="w-full min-h-20 text-xs p-2.5 rounded-md border border-border bg-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-sans leading-relaxed text-foreground"
+                      />
+                      <div className="flex gap-2 justify-end">
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          disabled={status === "submitting"}
+                          onClick={() => {
+                            setShowInput(false);
+                            setDecision(null);
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          size="sm"
+                          disabled={status === "submitting" || (decision === "Modify" && !rationale.trim())}
+                          onClick={() => submitDecision(decision!, rationale)}
+                        >
+                          {status === "submitting" ? (
+                            <Loader2 className="h-3 w-3 animate-spin mr-1.5" />
+                          ) : null}
+                          Submit Decision
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mt-4 flex flex-wrap gap-2.5">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800"
+                        disabled={status === "submitting"}
+                        onClick={() => {
+                          submitDecision("Approve", "");
+                        }}
+                      >
+                        Approve
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-amber-200 text-amber-700 hover:bg-amber-50 hover:text-amber-800"
+                        disabled={status === "submitting"}
+                        onClick={() => {
+                          setDecision("Modify");
+                          setShowInput(true);
+                        }}
+                      >
+                        Modify
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-rose-200 text-rose-700 hover:bg-rose-50 hover:text-rose-800"
+                        disabled={status === "submitting"}
+                        onClick={() => {
+                          setDecision("Reject");
+                          setShowInput(true);
+                        }}
+                      >
+                        Reject
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="space-y-4">

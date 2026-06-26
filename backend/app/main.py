@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import io
 import os
 import tempfile
 from pathlib import Path
@@ -12,8 +14,11 @@ except ImportError:
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
+from typing import Optional, Dict, Any
 
-from .database import init_db, save_report
+from .database import init_db, save_report, save_feedback, get_feedback_dataset
 from .services.pdf_parser import extract_pdf_pages
 from .services.report_pipeline import build_review_report
 
@@ -82,4 +87,64 @@ async def analyze_pdf(file: UploadFile = File(...)) -> dict:
     finally:
         if temp_path:
             Path(temp_path).unlink(missing_ok=True)
+
+
+class FeedbackRequest(BaseModel):
+    upload_id: Optional[int] = None
+    technology: str
+    decision: str
+    faculty_rationale: Optional[str] = None
+    original_recommendation: Dict[str, Any]
+
+
+@app.post("/api/feedback")
+def submit_feedback(payload: FeedbackRequest) -> dict[str, str]:
+    try:
+        save_feedback(
+            upload_id=payload.upload_id,
+            technology=payload.technology,
+            decision=payload.decision,
+            faculty_rationale=payload.faculty_rationale,
+            original_recommendation=payload.original_recommendation,
+        )
+        return {"status": "success", "message": "Feedback recorded successfully."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/export-finetuning")
+def export_finetuning() -> StreamingResponse:
+    try:
+        records = get_feedback_dataset()
+        output = io.BytesIO()
+        for rec in records:
+            chat_format = {
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are ModSync, an AI curriculum review assistant. You analyze course modules for legacy technologies and suggest modern replacements. Adjust recommendations based on faculty alignment feedback.",
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Technology: {rec['technology']}\nOriginal Recommendation:\n{json.dumps(rec['original_recommendation'], indent=2)}",
+                    },
+                    {
+                        "role": "assistant",
+                        "content": f"Decision: {rec['decision']}\nFaculty Rationale: {rec['faculty_rationale'] or 'No rationale provided.'}",
+                    },
+                ]
+            }
+            output.write((json.dumps(chat_format) + "\n").encode("utf-8"))
+
+        output.seek(0)
+        return StreamingResponse(
+            output,
+            media_type="application/x-jsonlines",
+            headers={
+                "Content-Disposition": "attachment; filename=modsync_finetuning_dataset.jsonl"
+            },
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 

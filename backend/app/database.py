@@ -76,3 +76,53 @@ def save_report(filename: str, file_size: int, report: dict[str, Any]) -> int:
         connection.commit()
         return upload_id
 
+
+def save_feedback(
+    upload_id: int | None,
+    technology: str,
+    decision: str,
+    faculty_rationale: str | None,
+    original_recommendation: dict[str, Any],
+) -> None:
+    init_db()
+    with connect() as connection:
+        connection.execute(
+            """
+            INSERT INTO feedback_logs (
+                upload_id, technology, decision, faculty_rationale, original_recommendation
+            ) VALUES (?, ?, ?, ?, ?)
+            """,
+            (
+                upload_id,
+                technology,
+                decision,
+                faculty_rationale,
+                json.dumps(original_recommendation),
+            ),
+        )
+        connection.commit()
+
+
+def get_feedback_dataset() -> list[dict[str, Any]]:
+    init_db()
+    records = []
+    with connect() as connection:
+        cursor = connection.execute(
+            "SELECT upload_id, technology, decision, faculty_rationale, original_recommendation, created_at FROM feedback_logs ORDER BY id ASC"
+        )
+        for row in cursor:
+            try:
+                orig_rec = json.loads(row["original_recommendation"])
+            except Exception:
+                orig_rec = row["original_recommendation"]
+            records.append({
+                "upload_id": row["upload_id"],
+                "technology": row["technology"],
+                "decision": row["decision"],
+                "faculty_rationale": row["faculty_rationale"],
+                "original_recommendation": orig_rec,
+                "created_at": row["created_at"],
+            })
+    return records
+
+

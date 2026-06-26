@@ -37,3 +37,16 @@ CREATE INDEX IF NOT EXISTS idx_detections_upload_id ON detections(upload_id);
 CREATE INDEX IF NOT EXISTS idx_recommendations_upload_id ON recommendations(upload_id);
 CREATE INDEX IF NOT EXISTS idx_recommendations_priority ON recommendations(review_priority);
 
+CREATE TABLE IF NOT EXISTS feedback_logs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  upload_id INTEGER,
+  technology TEXT NOT NULL,
+  decision TEXT NOT NULL,
+  faculty_rationale TEXT,
+  original_recommendation TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (upload_id) REFERENCES uploads(id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_feedback_logs_upload_id ON feedback_logs(upload_id);
+
