@@ -23,7 +23,6 @@ Our engine (`agentic_pipeline.py`) is built to be fast, mathematically accurate,
 ## 🤖 AI Usage Disclosure
 
 *   **Core Product Engine:** We integrated **OpenAI (GPT-4o)** and other **OpenAI models** APIs to create the multi-agent curriculum reviewer. We engineered the resilient fallback loop and multimodal integration natively.
-*   **AI Pair Programming:** We heavily utilized **Google Antigravity** as our AI Pair Programmer to accelerate prototyping. Antigravity helped architect the Python backend, refactor the Next.js frontend UI layouts, surgically merge branch features (Migration UI), and debug complex Python scope errors (`UnboundLocalError`).
 *   **Testing & Validation:** Conversational LLMs (Claude/ChatGPT) were used to generate highly specific, multi-disciplinary "mock syllabi" designed to stress-test our system with deliberate edge cases.
 
 ---

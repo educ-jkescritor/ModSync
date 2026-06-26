@@ -11,4 +11,5 @@ frontend/out/
 outputs/*.tmp
 
 frontend/public/static/
+backend/app/static/
 frontend/tsconfig.tsbuildinfo
