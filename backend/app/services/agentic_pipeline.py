@@ -98,10 +98,9 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             "Identify technologies, evaluate if they are outdated, and provide actionable recommendations. \n"
             "IMPORTANT SCORING RUBRIC:\n"
             "1. Calculate the 'priority_score' (0-100) strictly by adding the following sub-scores in 'score_breakdown':\n"
-            "   - 'technology_lifecycle_risk' (MUST BE BETWEEN 0 AND 40 pts): Higher if tech is End-of-Life, deprecated, or completely dead.\n"
-            "   - 'frequency' (MUST BE BETWEEN 0 AND 30 pts): Higher if the technology appears heavily across the module.\n"
-            "   - 'appears_in_labs' (MUST BE BETWEEN 0 AND 20 pts): Higher if students use it in hands-on labs.\n"
-            "   - 'appears_in_learning_activities' (MUST BE BETWEEN 0 AND 10 pts): Higher if tied to learning outcomes/rubrics.\n"
+            "   - 'technology_lifecycle_risk' (0-40 pts): Higher if tech is End-of-Life, deprecated, or completely dead.\n"
+            "   - 'frequency' (0-20 pts): Higher if the technology appears heavily across the module.\n"
+            "   - 'appears_in_labs' + 'appears_in_learning_activities' (0-40 pts combined): Max points if students are actively graded or practicing it.\n"
             "2. Set the 'review_priority' using these strict thresholds: 80-100='High', 50-79='Medium', 0-49='Low'.\n"
             "3. Assign a 'confidence_score' (0.0-1.0) based solely on your certainty of the textual evidence.\n"
             "4. For 'current_technology_references', provide documentation and tutorials for the specific technology found. For 'new_technology_references', provide links for the recommended modern replacement (if applicable, else modern best practices).\n"
@@ -126,12 +125,11 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             "      \"score_breakdown\": {\n"
             "        \"type\": \"object\",\n"
             "        \"properties\": {\n"
-            "          \"technology_lifecycle_risk\": {\"type\": \"integer\", \"minimum\": 0, \"maximum\": 40},\n"
-            "          \"frequency\": {\"type\": \"integer\", \"minimum\": 0, \"maximum\": 30},\n"
-            "          \"appears_in_labs\": {\"type\": \"integer\", \"minimum\": 0, \"maximum\": 20},\n"
-            "          \"appears_in_learning_activities\": {\"type\": \"integer\", \"minimum\": 0, \"maximum\": 10}\n"
-            "        },\n"
-            "        \"required\": [\"technology_lifecycle_risk\", \"frequency\", \"appears_in_labs\", \"appears_in_learning_activities\"]\n"
+            "          \"technology_lifecycle_risk\": {\"type\": \"integer\"},\n"
+            "          \"frequency\": {\"type\": \"integer\"},\n"
+            "          \"appears_in_labs\": {\"type\": \"integer\"},\n"
+            "          \"appears_in_learning_activities\": {\"type\": \"integer\"}\n"
+            "        }\n"
             "      },\n"
             "      \"pages\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}},\n"
             "      \"frequency\": {\"type\": \"integer\"},\n"
@@ -176,7 +174,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                     openai_content_parts.append({"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}})
                 except Exception as e:
                     print(f"Could not load image on page {cp['page']}: {e}")
-            
+                    
         last_error = None
         for model_name in models_to_try:
             try:
@@ -213,6 +211,27 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                 # Fallback if Gemini returned raw array despite prompt tweak
                 if not recommendations and isinstance(parsed_json, list):
                     recommendations = parsed_json
+                    
+                # Programmatically enforce math accuracy
+                for rec in recommendations:
+                    breakdown = rec.get("score_breakdown", {})
+                    total = (
+                        breakdown.get("technology_lifecycle_risk", 0) +
+                        breakdown.get("frequency", 0) +
+                        breakdown.get("appears_in_labs", 0) +
+                        breakdown.get("appears_in_learning_activities", 0)
+                    )
+                    # Cap total at 100 just in case
+                    total = min(100, max(0, total))
+                    rec["priority_score"] = total
+                    
+                    if total >= 80:
+                        rec["review_priority"] = "High"
+                    elif total >= 50:
+                        rec["review_priority"] = "Medium"
+                    else:
+                        rec["review_priority"] = "Low"
+                    
                     
                 print(f"Agent 2 successful via {model_name}")
                 last_error = None
