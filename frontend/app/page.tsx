@@ -5,6 +5,7 @@ import {
   AlertCircle,
   BookOpen,
   CheckCircle2,
+  ChevronDown,
   ClipboardCheck,
   Download,
   FileSearch,
@@ -215,10 +216,7 @@ export default function Home() {
                 )}
                 Generate review report
               </Button>
-              <Button variant="secondary" onClick={loadDemoReport}>
-                <FileSearch className="h-4 w-4" />
-                Demo report
-              </Button>
+              
               {file && (
                 <Button variant="ghost" onClick={() => setFile(null)} aria-label="Clear selected file">
                   <X className="h-4 w-4" />
@@ -282,10 +280,15 @@ export default function Home() {
       {report && (
         <section className="mx-auto max-w-7xl px-5 pb-8">
           <div className="mb-5 grid gap-3 md:grid-cols-4">
-            <SummaryTile label="Technologies" value={report.summary.technology_count} />
-            <SummaryTile label="Relevant pages" value={report.summary.relevant_pages_count} />
-            <SummaryTile label="High priority" value={report.summary.high_priority_count} tone="high" />
             <SummaryTile label="Pages analyzed" value={report.pages_analyzed} />
+            <SummaryTile label="Relevant pages" value={report.summary.relevant_pages_count} />
+            <SummaryTile label="Technologies" value={report.summary.technology_count} />
+            <SummaryTile label="High priority" value={report.summary.high_priority_count} tone="high" />
+          </div>
+
+          <div className="my-6">
+            <h2 className="text-xl font-semibold text-foreground">ModSync Course Alignment Findings</h2>
+            <p className="text-xs text-muted-foreground mt-1">Review automated modernization suggestions, examine exact syllabus quotes, and log faculty feedback.</p>
           </div>
 
           <div className="mb-5 flex flex-col gap-3 rounded-md border border-border bg-white p-4 md:flex-row md:items-center md:justify-between">
@@ -301,7 +304,7 @@ export default function Home() {
                   {item}
                 </Button>
               ))}
-              <div className="h-6 w-px bg-border mx-1 hidden sm:block" />
+              {/* <div className="h-6 w-px bg-border mx-1 hidden sm:block" />
               <Button
                 size="sm"
                 variant="outline"
@@ -310,7 +313,7 @@ export default function Home() {
               >
                 <Download className="h-4 w-4" />
                 Export Fine-Tuning Dataset
-              </Button>
+              </Button> */}
             </div>
             <div className="relative w-full md:w-80">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -500,28 +503,17 @@ function RecommendationCard({
             <Badge tone="neutral">{Math.round(recommendation.confidence_score * 100)}% confidence</Badge>
           </div>
         </div>
-        <p className="text-sm leading-6 text-muted-foreground break-words">
-          Found on {recommendation.pages.length === 1 ? "page" : "pages"} {recommendation.pages.join(", ")} ({recommendation.frequency} total mentions)
-        </p>
       </CardHeader>
       <CardContent>
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.8fr)]">
           <div className="space-y-4">
-            <Field label="Priority rationale" value={priorityRationale} />
-            <Field label="Why it was suggested" value={recommendation.why_suggested} />
-            <Field label="Industry observation" value={recommendation.industry_observation} />
-            <div className="rounded-md border border-border bg-white p-4 shadow-sm">
-              <h3 className="flex items-center gap-2 text-sm font-semibold text-primary">
-                <ListChecks className="h-4 w-4" />
-                Suggested faculty action
-              </h3>
-              {recommendation.suggested_faculty_action && (
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {recommendation.suggested_faculty_action}
-                </p>
-              )}
-              <RecommendationList recommendations={recommendation.specific_recommendations} />
+            <div>
+              <h3 className="text-sm font-semibold text-foreground">Analysis Summary</h3>
+              <div className="mt-2 rounded-md border border-border bg-slate-50/30 p-4 text-sm text-muted-foreground leading-relaxed shadow-sm">
+                <p>{recommendation.why_suggested || priorityRationale}</p>
+              </div>
             </div>
+           
             <EvidenceAndContext recommendation={recommendation} onImageClick={onImageClick} />
             
             {/* Migration Assistant Panel */}
@@ -584,6 +576,22 @@ function RecommendationCard({
                 </div>
               </div>
             )}
+
+
+
+
+<div className="rounded-md border border-border bg-white p-4 shadow-sm">
+              <h3 className="flex items-center gap-2 text-sm font-semibold text-primary">
+                <ListChecks className="h-4 w-4" />
+                Suggested faculty action
+              </h3>
+              {recommendation.suggested_faculty_action && (
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {recommendation.suggested_faculty_action}
+                </p>
+              )}
+              <RecommendationList recommendations={recommendation.specific_recommendations} />
+            </div>
 
             {/* Faculty Human-in-the-Loop Validation */}
             <div className="mt-6 border-t border-border pt-4">
@@ -737,21 +745,25 @@ function ScoreBreakdown({ recommendation }: { recommendation: Recommendation }) 
     {
       label: "Lifecycle",
       value: recommendation.score_breakdown.technology_lifecycle_risk,
+      max: 40,
       description: "Scores how outdated or deprecated a technology is (0-40 pts). High risk means it is End-of-Life and may break labs."
     },
     {
       label: "Frequency",
       value: recommendation.score_breakdown.frequency,
+      max: 30,
       description: "Scores how many times it was mentioned (0-30 pts). High frequency implies the module is structurally dependent on it."
     },
     {
       label: "Labs",
       value: recommendation.score_breakdown.appears_in_labs,
+      max: 20,
       description: "Adds 20 pts if the technology is used in hands-on labs, as deprecated tooling will immediately block students."
     },
     {
       label: "Activities",
       value: recommendation.score_breakdown.appears_in_learning_activities,
+      max: 10,
       description: "Adds 10 pts if the technology is tied to learning outcomes, requiring rubric updates if changed."
     }
   ];
@@ -759,18 +771,35 @@ function ScoreBreakdown({ recommendation }: { recommendation: Recommendation }) 
   return (
     <div>
       <h3 className="text-sm font-semibold">Priority score {recommendation.priority_score}/100</h3>
-      <div className="mt-2 space-y-2">
-        {rows.map(({ label, value, description }) => (
-          <details key={label} className="group rounded-md bg-muted text-sm cursor-pointer [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between px-3 py-2">
-              <span className="text-muted-foreground underline decoration-dashed underline-offset-4">{label}</span>
-              <span className="font-semibold">{value}</span>
-            </summary>
-            <div className="px-3 pb-3 pt-1 text-muted-foreground">
-              {description}
-            </div>
-          </details>
-        ))}
+      <div className="mt-3 space-y-3">
+        {rows.map(({ label, value, max, description }) => {
+          const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+          return (
+            <details key={label} className="group rounded-md border border-border bg-card text-sm cursor-pointer shadow-sm hover:border-primary/20 transition-colors">
+              <summary className="p-3 list-none [&::-webkit-details-marker]:hidden [&::marker]:content-['']">
+                <div className="flex items-center justify-between font-medium">
+                  <span className="text-foreground">{label}</span>
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <span className="text-xs">{value} / {max}</span>
+                    <ChevronDown className="h-4 w-4 transition-transform duration-200 group-open:rotate-180" />
+                  </div>
+                </div>
+                <div className="mt-2.5 flex items-center gap-3">
+                  <div className="h-2 flex-1 rounded-full bg-slate-100 overflow-hidden">
+                    <div 
+                      className="h-full rounded-full bg-primary transition-all duration-350"
+                      style={{ width: `${percentage}%` }}
+                    />
+                  </div>
+                  <span className="text-xs font-semibold w-7 text-right text-primary">{Math.round(percentage)}%</span>
+                </div>
+              </summary>
+              <div className="px-3 pb-3 pt-1 text-xs text-muted-foreground border-t border-border bg-slate-50/50 leading-relaxed">
+                {description}
+              </div>
+            </details>
+          );
+        })}
       </div>
     </div>
   );
