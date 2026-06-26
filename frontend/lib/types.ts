@@ -38,6 +38,7 @@ export type Recommendation = {
     context_text: string;
     appears_in_lab?: boolean;
     appears_in_learning_activity?: boolean;
+    image_url?: string;
   }[];
   score_breakdown: {
     technology_lifecycle_risk: number;

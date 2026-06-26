@@ -48,6 +48,7 @@ export default function Home() {
   const [debugPages, setDebugPages] = useState<any[] | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<FilterValue>("All");
   const [query, setQuery] = useState("");
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
 
   const progress = stages.find((item) => item.id === stage)?.progress ?? 0;
 
@@ -328,6 +329,7 @@ export default function Home() {
                 key={`${recommendation.technology}-${recommendation.review_priority}`}
                 recommendation={recommendation}
                 uploadId={report.id}
+                onImageClick={setExpandedImage}
               />
             ))}
           </div>
@@ -382,6 +384,32 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Expanded Screenshot Modal Overlay */}
+      {expandedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 animate-in fade-in duration-200 cursor-zoom-out"
+          onClick={() => setExpandedImage(null)}
+        >
+          <div 
+            className="relative max-w-5xl max-h-[92vh] overflow-hidden rounded-lg bg-white p-2 shadow-2xl animate-in zoom-in-95 duration-200 cursor-default" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setExpandedImage(null)}
+              className="absolute right-4 top-4 rounded-full bg-slate-900/60 p-2 text-white hover:bg-slate-900 transition-colors focus:outline-none z-10 shadow"
+              aria-label="Close image modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <img
+              src={expandedImage}
+              alt="Expanded Visual Reference"
+              className="max-w-full max-h-[86vh] object-contain rounded-md"
+            />
+          </div>
+        </div>
+      )}
     </main>
   );
 }
@@ -407,10 +435,12 @@ function SummaryTile({
 
 function RecommendationCard({
   recommendation,
-  uploadId
+  uploadId,
+  onImageClick
 }: {
   recommendation: Recommendation;
   uploadId?: number;
+  onImageClick?: (url: string) => void;
 }) {
   const tone =
     recommendation.review_priority === "High"
@@ -492,7 +522,7 @@ function RecommendationCard({
               )}
               <RecommendationList recommendations={recommendation.specific_recommendations} />
             </div>
-            <EvidenceAndContext recommendation={recommendation} />
+            <EvidenceAndContext recommendation={recommendation} onImageClick={onImageClick} />
             
             {/* Migration Assistant Panel */}
             {recommendation.migration_guide && (
@@ -762,7 +792,13 @@ function RecommendationList({ recommendations }: { recommendations?: string[] })
   );
 }
 
-function EvidenceAndContext({ recommendation }: { recommendation: Recommendation }) {
+function EvidenceAndContext({
+  recommendation,
+  onImageClick
+}: {
+  recommendation: Recommendation;
+  onImageClick?: (url: string) => void;
+}) {
   const contexts = recommendation.sample_contexts ?? [];
   const reasons = recommendation.page_review_reasons ?? [];
   
@@ -780,19 +816,44 @@ function EvidenceAndContext({ recommendation }: { recommendation: Recommendation
           
           return (
             <div key={ctx.page} className="rounded-md border border-border bg-white overflow-hidden shadow-sm">
-              <div className="bg-muted px-3 py-2 border-b border-border flex items-center gap-2">
-                <Badge tone="neutral">Page {ctx.page}</Badge>
-                <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Exact Quote</span>
+              <div className="bg-muted px-3 py-2 border-b border-border flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Badge tone="neutral">Page {ctx.page}</Badge>
+                  <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Exact Quote</span>
+                </div>
+                {ctx.image_url && (
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-teal-600 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-100 uppercase tracking-wide">
+                    <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
+                    Visual Reference Available
+                  </span>
+                )}
               </div>
-              <div className="p-4 space-y-3">
-                <blockquote className="border-l-4 border-primary/40 pl-4 italic text-sm text-muted-foreground bg-teal-50/50 py-2 rounded-r-sm">
-                  "{ctx.context_text}"
-                </blockquote>
-                {matchingReason?.reason && (
-                  <p className="text-sm leading-6 text-foreground">
-                    <span className="font-semibold text-primary">AI Context: </span>
-                    {matchingReason.reason}
-                  </p>
+              <div className="p-4 flex flex-col md:flex-row gap-4 items-start">
+                <div className="flex-1 space-y-3 w-full">
+                  <blockquote className="border-l-4 border-primary/40 pl-4 italic text-sm text-muted-foreground bg-teal-50/50 py-2 rounded-r-sm break-words">
+                    "{ctx.context_text}"
+                  </blockquote>
+                  {matchingReason?.reason && (
+                    <p className="text-sm leading-6 text-foreground">
+                      <span className="font-semibold text-primary">AI Context: </span>
+                      {matchingReason.reason}
+                    </p>
+                  )}
+                </div>
+                {ctx.image_url && (
+                  <div 
+                    onClick={() => ctx.image_url && onImageClick?.(ctx.image_url)}
+                    className="w-full md:w-48 shrink-0 flex flex-col items-center justify-center border border-border rounded-md bg-slate-50 p-2 shadow-sm hover:border-primary/45 cursor-pointer hover:scale-[1.02] transition-all group"
+                  >
+                    <img
+                      src={ctx.image_url}
+                      alt={`Page ${ctx.page} Visual Reference`}
+                      className="max-w-full max-h-32 object-contain rounded border border-border bg-white shadow-sm group-hover:shadow-md transition-shadow"
+                    />
+                    <span className="text-[10px] text-muted-foreground mt-2 font-medium flex items-center gap-1 group-hover:text-primary transition-colors">
+                      Zoom Screenshot
+                    </span>
+                  </div>
                 )}
               </div>
             </div>

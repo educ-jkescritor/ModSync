@@ -275,6 +275,8 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                 detail=f"All models failed. Last error: {last_error}"
             )
 
+    enrich_recommendation_contexts(recommendations, pages)
+
     return {
         "filename": filename,
         "file_size": file_size,
@@ -289,3 +291,92 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             "low_priority_count": sum(1 for r in recommendations if r.get("review_priority") == "Low"),
         },
     }
+
+
+def enrich_recommendation_contexts(recommendations: list[dict[str, Any]], pages: list[dict[str, Any]]) -> None:
+    import re
+    from .context_extraction import LAB_KEYWORDS, LEARNING_KEYWORDS, split_sentences_with_spans
+
+    text_by_page = {int(p.get("page", 0)): p.get("text", "") or "" for p in pages}
+
+    for rec in recommendations:
+        tech = rec.get("technology", "")
+        rec_pages = rec.get("pages", [])
+
+        # If LLM didn't return pages, try to find them by scanning the page text
+        if not rec_pages:
+            rec_pages = []
+            for p_num, p_text in text_by_page.items():
+                if tech.lower() in p_text.lower():
+                    rec_pages.append(p_num)
+            rec["pages"] = sorted(rec_pages)
+
+        sample_contexts = []
+        page_review_reasons = []
+
+        for p_num in rec_pages:
+            text = text_by_page.get(int(p_num), "")
+            if not text:
+                continue
+
+            sentence_spans = split_sentences_with_spans(text)
+            match_idx = -1
+
+            # 1. Exact match of technology name
+            for idx, (sentence, _, _) in enumerate(sentence_spans):
+                if tech.lower() in sentence.lower():
+                    match_idx = idx
+                    break
+
+            # 2. Match by individual words (longer than 2 characters)
+            if match_idx == -1:
+                tech_words = [w for w in re.split(r"\s+", tech) if len(w) > 2]
+                if tech_words:
+                    for idx, (sentence, _, _) in enumerate(sentence_spans):
+                        if any(w.lower() in sentence.lower() for w in tech_words):
+                            match_idx = idx
+                            break
+
+            # 3. Fallback to first sentence
+            if match_idx == -1:
+                match_idx = 0
+
+            # Extract sentence window (previous, match, next)
+            if sentence_spans:
+                start_idx = max(match_idx - 1, 0)
+                end_idx = min(match_idx + 2, len(sentence_spans))
+                window = sentence_spans[start_idx:end_idx]
+                context_sentences = [sentence for sentence, _, _ in window]
+                context_text = " ".join(context_sentences)
+            else:
+                context_sentences = [text[:200]]
+                context_text = text[:200]
+
+            lowered = context_text.lower()
+
+            sample_contexts.append({
+                "page": p_num,
+                "context": context_sentences,
+                "context_text": context_text,
+                "appears_in_lab": any(keyword in lowered for keyword in LAB_KEYWORDS),
+                "appears_in_learning_activity": any(keyword in lowered for keyword in LEARNING_KEYWORDS)
+            })
+
+            # Construct dynamic reason based on LLM's recommendation details
+            reason_text = f"Page {p_num} includes references to {tech}."
+            if rec.get("why_suggested"):
+                reason_text += f" {rec['why_suggested']}"
+
+            page_review_reasons.append({
+                "page": p_num,
+                "context_text": context_text,
+                "reason": reason_text,
+                "review_focus": "Technology usage alignment",
+                "implications": [
+                    f"Replace {tech} instruction with modern alternatives."
+                ]
+            })
+
+        rec["sample_contexts"] = sample_contexts[:3] # Cap at 3 contexts
+        rec["page_review_reasons"] = page_review_reasons
+

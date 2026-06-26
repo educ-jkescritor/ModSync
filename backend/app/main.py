@@ -4,6 +4,7 @@ import json
 import io
 import os
 import tempfile
+import uuid
 from pathlib import Path
 
 try:
@@ -19,8 +20,9 @@ from pydantic import BaseModel
 from typing import Optional, Dict, Any
 
 from .database import init_db, save_report, save_feedback, get_feedback_dataset
-from .services.pdf_parser import extract_pdf_pages
+from .services.pdf_parser import extract_pdf_pages, render_pdf_pages
 from .services.report_pipeline import build_review_report
+
 
 
 app = FastAPI(title="Faculty Curriculum Review Assistant API", version="0.1.0")
@@ -61,10 +63,15 @@ async def analyze_pdf(file: UploadFile = File(...)) -> dict:
         raise HTTPException(status_code=400, detail="The uploaded PDF is empty.")
 
     temp_path: str | None = None
+    pdf_uuid = str(uuid.uuid4())
     try:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
             temp_file.write(raw)
             temp_path = temp_file.name
+
+        # Render PDF pages to static images for frontend visual references
+        frontend_static_dir = Path(__file__).resolve().parents[2] / "frontend" / "public" / "static"
+        render_pdf_pages(temp_path, frontend_static_dir / pdf_uuid)
 
         pages = extract_pdf_pages(temp_path)
         
@@ -82,11 +89,19 @@ async def analyze_pdf(file: UploadFile = File(...)) -> dict:
             print(f"Pipeline crashed: {e}")
             raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
             
+        # Enrich recommendations with page screenshot URLs
+        for rec in report.get("recommendations", []):
+            for ctx in rec.get("sample_contexts", []):
+                page_num = ctx.get("page")
+                if page_num:
+                    ctx["image_url"] = f"/static/{pdf_uuid}/page_{page_num}.png"
+
         upload_id = save_report(filename, len(raw), report)
         return {"id": upload_id, **report}
     finally:
         if temp_path:
             Path(temp_path).unlink(missing_ok=True)
+
 
 
 class FeedbackRequest(BaseModel):

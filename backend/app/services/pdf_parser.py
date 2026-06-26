@@ -70,3 +70,17 @@ def _extract_with_pypdf(path: Path) -> list[dict[str, Any]]:
         for index, page in enumerate(reader.pages, start=1)
     ]
 
+
+def render_pdf_pages(pdf_path: str | Path, output_dir: str | Path) -> None:
+    import fitz
+    out_path = Path(output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+    try:
+        with fitz.open(pdf_path) as doc:
+            for index, page in enumerate(doc, start=1):
+                pix = page.get_pixmap(dpi=100) # Use 100 DPI to save disk space and run faster
+                pix.save(str(out_path / f"page_{index}.png"))
+    except Exception as e:
+        print(f"Failed to render PDF pages to PNG: {e}")
+
+
