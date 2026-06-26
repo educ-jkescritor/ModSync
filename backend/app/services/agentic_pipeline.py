@@ -61,7 +61,16 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                         )
                         content = response.text or "{}"
                         
-                    found_techs = json.loads(content).get("technologies", [])
+                    # Strip potential markdown code blocks
+                    content_clean = content.strip()
+                    if content_clean.startswith("```json"):
+                        content_clean = content_clean[7:]
+                    elif content_clean.startswith("```"):
+                        content_clean = content_clean[3:]
+                    if content_clean.endswith("```"):
+                        content_clean = content_clean[:-3]
+                        
+                    found_techs = json.loads(content_clean.strip()).get("technologies", [])
                     print(f"  Page {page['page']} tech found: {found_techs} (via {model_name})")
                     last_error = None
                     break
@@ -82,7 +91,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             candidate_pages.append({
                 "page": page["page"],
                 "text": text,
-                "images": [],
+                "images": images,
                 "techs": found_techs
             })
 
@@ -213,7 +222,16 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                     )
                     content = response.text or "{}"
 
-                parsed_json = json.loads(content)
+                # Strip potential markdown code blocks
+                content_clean = content.strip()
+                if content_clean.startswith("```json"):
+                    content_clean = content_clean[7:]
+                elif content_clean.startswith("```"):
+                    content_clean = content_clean[3:]
+                if content_clean.endswith("```"):
+                    content_clean = content_clean[:-3]
+
+                parsed_json = json.loads(content_clean.strip())
                 recommendations = parsed_json.get("recommendations", [])
                 
                 # Fallback if Gemini returned raw array despite prompt tweak
