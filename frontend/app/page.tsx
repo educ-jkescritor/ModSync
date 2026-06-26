@@ -423,6 +423,67 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
               <RecommendationList recommendations={recommendation.specific_recommendations} />
             </div>
             <EvidenceAndContext recommendation={recommendation} />
+            
+            {/* Migration Assistant Panel */}
+            {recommendation.migration_guide && (
+              <div className="rounded-md border border-border bg-white p-4 shadow-sm">
+                <h3 className="flex items-center gap-2 text-sm font-semibold text-primary">
+                  <Lightbulb className="h-4 w-4" />
+                  Migration Assistant (AI-Generated Guide)
+                </h3>
+                <div className="mt-2 text-xs text-muted-foreground leading-relaxed whitespace-pre-line bg-teal-50/20 p-3 rounded border border-teal-100">
+                  {recommendation.migration_guide}
+                </div>
+
+                {/* Educational Rationale & Standard references */}
+                {(recommendation.migration_rationale_why_deprecated || recommendation.migration_rationale_modern_benefits) && (
+                  <div className="mt-3 grid gap-3 md:grid-cols-2 text-xs">
+                    {recommendation.migration_rationale_why_deprecated && (
+                      <div className="rounded-md border border-rose-100 bg-rose-50/30 p-3">
+                        <span className="font-semibold text-rose-800 flex items-center gap-1.5 mb-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-rose-500 animate-pulse" />
+                          Why it is Outdated & Discouraged
+                        </span>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {recommendation.migration_rationale_why_deprecated}
+                        </p>
+                      </div>
+                    )}
+                    {recommendation.migration_rationale_modern_benefits && (
+                      <div className="rounded-md border border-teal-100 bg-teal-50/30 p-3">
+                        <span className="font-semibold text-teal-800 flex items-center gap-1.5 mb-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
+                          Why the Modern Approach is Superior
+                        </span>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {recommendation.migration_rationale_modern_benefits}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Legacy vs Modern side-by-side code blocks */}
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {recommendation.migration_legacy_code && (
+                    <div className="rounded-md border border-rose-200 bg-rose-50/20 p-3">
+                      <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider block mb-1">Legacy / Deprecated Context</span>
+                      <pre className="text-xs font-mono bg-slate-900 text-slate-100 p-2.5 rounded overflow-x-auto whitespace-pre-wrap max-h-48">
+                        {recommendation.migration_legacy_code}
+                      </pre>
+                    </div>
+                  )}
+                  {recommendation.migration_modern_code && (
+                    <div className="rounded-md border border-teal-200 bg-teal-50/20 p-3">
+                      <span className="text-[10px] font-bold text-teal-700 uppercase tracking-wider block mb-1">Modern / Recommended Replacement</span>
+                      <pre className="text-xs font-mono bg-slate-900 text-slate-100 p-2.5 rounded overflow-x-auto whitespace-pre-wrap max-h-48">
+                        {recommendation.migration_modern_code}
+                      </pre>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-4">
