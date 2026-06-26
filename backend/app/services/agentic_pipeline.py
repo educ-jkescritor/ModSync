@@ -141,6 +141,8 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
         )
         
         contents_text = ""
+        openai_content_parts = []
+        gemini_image_parts = []
         for cp in candidate_pages:
             contents_text += f"\n--- PAGE {cp['page']} ---\n"
             contents_text += f"Agent 1 identified these technologies: {', '.join(cp['techs']) if cp['techs'] else 'None'}\n"
@@ -163,15 +165,28 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
             if next_text:
                 contents_text += f"[Next Context - Page {cp['page'] + 1} Text]:\n{next_text[:2000]}\n"
             
+            for img_b64 in cp.get('images', []):
+                try:
+                    img_bytes = base64.b64decode(img_b64)
+                    # For Gemini
+                    gemini_image_parts.append(types.Part.from_bytes(data=img_bytes, mime_type='image/png'))
+                    # For OpenAI
+                    openai_content_parts.append({"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}})
+                except Exception as e:
+                    print(f"Could not load image on page {cp['page']}: {e}")
+                    
         last_error = None
         for model_name in models_to_try:
             try:
                 if model_name.startswith("gpt-"):
+                    # Build OpenAI user message payload
+                    openai_user_content = [{"type": "text", "text": contents_text}] + openai_content_parts
+                    
                     response = openai_client.chat.completions.create(
                         model=model_name,
                         messages=[
                             {"role": "system", "content": system_prompt},
-                            {"role": "user", "content": contents_text}
+                            {"role": "user", "content": openai_user_content}
                         ],
                         response_format={"type": "json_object"},
                         temperature=0.2
@@ -179,7 +194,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                     content = response.choices[0].message.content or "{}"
                 else:
                     # For Gemini, we combine system prompt and user prompt
-                    gemini_prompt = system_prompt + "\n\n" + contents_text
+                    gemini_prompt = [system_prompt + "\n\n" + contents_text] + gemini_image_parts
                     response = gemini_client.models.generate_content(
                         model=model_name,
                         contents=gemini_prompt,
@@ -196,6 +211,27 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
                 # Fallback if Gemini returned raw array despite prompt tweak
                 if not recommendations and isinstance(parsed_json, list):
                     recommendations = parsed_json
+                    
+                # Programmatically enforce math accuracy
+                for rec in recommendations:
+                    breakdown = rec.get("score_breakdown", {})
+                    total = (
+                        breakdown.get("technology_lifecycle_risk", 0) +
+                        breakdown.get("frequency", 0) +
+                        breakdown.get("appears_in_labs", 0) +
+                        breakdown.get("appears_in_learning_activities", 0)
+                    )
+                    # Cap total at 100 just in case
+                    total = min(100, max(0, total))
+                    rec["priority_score"] = total
+                    
+                    if total >= 80:
+                        rec["review_priority"] = "High"
+                    elif total >= 50:
+                        rec["review_priority"] = "Medium"
+                    else:
+                        rec["review_priority"] = "Low"
+                    
                     
                 print(f"Agent 2 successful via {model_name}")
                 last_error = None
