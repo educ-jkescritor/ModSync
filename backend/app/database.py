@@ -76,3 +76,18 @@ def save_report(filename: str, file_size: int, report: dict[str, Any]) -> int:
         connection.commit()
         return upload_id
 
+
+def save_feedback(upload_id: int | None, technology: str, decision: str, rationale: str | None, original_recommendation: str) -> None:
+    init_db()
+    with connect() as connection:
+        connection.execute(
+            """
+            INSERT INTO feedback_logs (
+              upload_id, technology, decision, faculty_rationale, original_recommendation
+            ) VALUES (?, ?, ?, ?, ?)
+            """,
+            (upload_id, technology, decision, rationale, original_recommendation),
+        )
+        connection.commit()
+
+

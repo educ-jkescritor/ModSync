@@ -1,7 +1,7 @@
 {
   "filename": "example-module.pdf",
   "file_size": 2613,
-  "pages_analyzed": 2,
+  "pages_analyzed": 3,
   "detections": [
     {
       "technology": "AngularJS",
@@ -406,7 +406,8 @@
             "Students may rely on documentation, examples, or packages whose support status should be verified by faculty.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-1.jpg"
         }
       ],
       "explainability": [
@@ -475,7 +476,12 @@
         1
       ],
       "frequency": 1,
-      "ai_mode": "local_fallback"
+      "ai_mode": "local_fallback",
+      "migration_guide": "1. Locate the AngularJS directives (e.g., ng-model, ng-repeat) in your HTML.\n2. Convert the templates to React JSX or modern Angular components.\n3. Implement modern state hooks (e.g., useState) to replace two-way data binding.",
+      "migration_legacy_code": "<!-- Legacy AngularJS Template -->\n<div ng-app=\"app\">\n  <input ng-model=\"msg\">\n  <p>Hello: {{msg}}</p>\n</div>",
+      "migration_modern_code": "// Modern React Equivalent\nimport { useState } from 'react';\n\nexport default function Greeting() {\n  const [msg, setMsg] = useState('');\n  return (\n    <div>\n      <input value={msg} onChange={e => setMsg(e.target.value)} />\n      <p>Hello: {msg}</p>\n    </div>\n  );\n}",
+      "migration_rationale_why_deprecated": "AngularJS (v1.x) reached official End-of-Life (EOL) in January 2022. It suffers from severe security vulnerabilities (e.g., prototype pollution, XSS) that will never be patched. Its digest loop mechanism is slow on modern web scales, and it lacks first-class component architecture.",
+      "migration_rationale_modern_benefits": "Modern alternatives (like React, Vue, or Angular 2+) utilize virtual DOM or signal systems for excellent performance. They provide strict compile-time TypeScript checks, robust component reuse, and expose students to the exact toolchains used by industry today."
     },
     {
       "technology": "Bootstrap 3",
@@ -504,7 +510,8 @@
             "Students may rely on documentation, examples, or packages whose support status should be verified by faculty.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-1.jpg"
         }
       ],
       "explainability": [
@@ -600,7 +607,8 @@
           "implications": [
             "Students may rely on documentation, examples, or packages whose support status should be verified by faculty.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-2.jpg"
         }
       ],
       "explainability": [
@@ -669,7 +677,12 @@
         2
       ],
       "frequency": 1,
-      "ai_mode": "local_fallback"
+      "ai_mode": "local_fallback",
+      "migration_guide": "1. Upgrade database queries from the deprecated mysql_* procedural interface.\n2. Bind parameters using PDO or mysqli with prepared statements to prevent SQL Injection vulnerabilities.\n3. Target PHP 8.2+ runtimes.",
+      "migration_legacy_code": "// Legacy PHP 5 MySQL connection & query\n$conn = mysql_connect('localhost', 'user', 'pass');\nmysql_select_db('mydb', $conn);\n$result = mysql_query('SELECT * FROM users WHERE name = \\'' . $_GET['name'] . '\\'');",
+      "migration_modern_code": "// Modern PHP 8.2+ PDO Prepared Query\n$pdo = new PDO('mysql:host=localhost;dbname=mydb', 'user', 'pass');\n$stmt = $pdo->prepare('SELECT * FROM users WHERE name = :name');\n$stmt->execute(['name' => $_GET['name']]);\n$users = $stmt->fetchAll();",
+      "migration_rationale_why_deprecated": "PHP 5 has been unsupported for years and lacks critical security patches, leaving servers vulnerable. The legacy mysql_* library doesn't support parameterized queries, making applications highly susceptible to SQL injection attacks.",
+      "migration_rationale_modern_benefits": "PHP 8+ includes JIT compilation for massive execution speedups. Using PDO with prepared statement bindings guarantees safety against SQL injections, and modern features like strict types and constructor property promotion ensure cleaner, safer codebases."
     },
     {
       "technology": "SVN",
@@ -696,7 +709,8 @@
           "implications": [
             "Version-specific instructions may need confirmation against current official guidance.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling."
-          ]
+          ],
+          "image_url": "/demo-page-2.jpg"
         }
       ],
       "explainability": [
@@ -793,7 +807,8 @@
             "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-1.jpg"
         }
       ],
       "explainability": [
@@ -890,7 +905,8 @@
             "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-1.jpg"
         }
       ],
       "explainability": [
@@ -987,7 +1003,8 @@
             "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-2.jpg"
         }
       ],
       "explainability": [
@@ -1082,7 +1099,8 @@
           "implications": [
             "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
             "Hands-on tasks can create student blockers when setup steps, dependencies, or screenshots no longer match current tooling."
-          ]
+          ],
+          "image_url": "/demo-page-2.jpg"
         }
       ],
       "explainability": [
@@ -1177,7 +1195,8 @@
           "implications": [
             "The technology appears broadly current, so review should focus on whether the page uses current practices and references.",
             "Because the mention is near student activity or outcome language, changes may affect assessments or competency mapping."
-          ]
+          ],
+          "image_url": "/demo-page-2.jpg"
         }
       ],
       "explainability": [
@@ -1246,12 +1265,112 @@
       ],
       "frequency": 1,
       "ai_mode": "local_fallback"
+    },
+    {
+      "technology": "C++ goto statement",
+      "review_priority": "High",
+      "priority_score": 80,
+      "confidence_score": 0.95,
+      "industry_observation": "Unconditional jumps (goto) violate modern structured programming guidelines and are banned in modern industrial C++ codebases (e.g., Google C++ Style Guide).",
+      "why_suggested": "Detected goto loop construction on page 3. The local scoring model assigned 80 points due to lifecycle risk of anti-patterns and code flow dependencies.",
+      "priority_rationale": "It is marked High priority because loop jumping with goto creates spaghetti code and breaks modern structured flow expectations taught in college curricula.",
+      "suggested_faculty_action": "Replace the outdated C++ goto loop on page 3 with a standard structured while-loop and control flow statements like break.",
+      "specific_recommendations": [
+        "Locate the goto loop labels and unconditional jump commands on page 3.",
+        "Rewrite the loop using a standard while(true) loop structure.",
+        "Use a break statement to exit the loop block when the condition is met, maintaining clean control flow.",
+        "Add a module assignment to have students refactor outdated goto files into structured code."
+      ],
+      "page_review_reasons": [
+        {
+          "page": 3,
+          "context_text": "Module 3: C++ Control Flow & Looping. Students will write program loops. Outdated loop structure uses goto labels to jump back and forth.",
+          "reason": "Page 3 includes goto labels to construct standard loops. This is a deprecated design practice; use structured looping structures instead.",
+          "review_focus": "Curriculum code quality and loop design standard",
+          "implications": [
+            "Students taught goto for standard loops fail to learn structured programming concepts.",
+            "Goto loops are harder to maintain, analyze, and optimize."
+          ],
+          "image_url": "/demo-page-3.jpg"
+        }
+      ],
+      "explainability": [
+        {
+          "factor": "Lifecycle",
+          "points": 40,
+          "max_points": 40,
+          "evidence": "Goto for standard loops is considered a major code anti-pattern.",
+          "implication": "Lifecycle risk flags goto because it violates structured control paradigms.",
+          "review_question": "Should goto loops be refactored into modern loops in this course?"
+        },
+        {
+          "factor": "Frequency",
+          "points": 10,
+          "max_points": 30,
+          "evidence": "Detected 1 time on page 3.",
+          "implication": "Mentions contribute to review urgency.",
+          "review_question": "Is this the only place goto is taught?"
+        },
+        {
+          "factor": "Labs",
+          "points": 20,
+          "max_points": 20,
+          "evidence": "Taught in loop construction laboratory exercises.",
+          "implication": "Students will use goto in labs.",
+          "review_question": "Do lab instructions prompt students to write goto?"
+        },
+        {
+          "factor": "Activities",
+          "points": 10,
+          "max_points": 10,
+          "evidence": "Part of the loop assessment criteria.",
+          "implication": "Requires rubric updates.",
+          "review_question": "Are assessments checking goto competency?"
+        }
+      ],
+      "official_documentation": [
+        "https://isocpp.org/wiki/faq/coding-standards",
+        "https://google.github.io/styleguide/cppguide.html"
+      ],
+      "learning_resources": [
+        "https://learn.microsoft.com/en-us/cpp/cpp/goto-statement-cpp",
+        "https://www.geeksforgeeks.org/goto-statement-in-c-cpp/"
+      ],
+      "faculty_validation_required": true,
+      "sample_contexts": [
+        {
+          "page": 3,
+          "context": [
+            "Module 3: C++ Control Flow & Looping.",
+            "Outdated loop structure uses goto labels to jump back and forth."
+          ],
+          "context_text": "Module 3: C++ Control Flow & Looping. Outdated loop structure uses goto labels to jump back and forth.",
+          "appears_in_lab": true,
+          "appears_in_learning_activity": true
+        }
+      ],
+      "score_breakdown": {
+        "technology_lifecycle_risk": 40,
+        "frequency": 10,
+        "appears_in_labs": 20,
+        "appears_in_learning_activities": 10
+      },
+      "pages": [
+        3
+      ],
+      "frequency": 1,
+      "ai_mode": "local_fallback",
+      "migration_guide": "1. Identify the label declarations (e.g. 'Start:', 'End:') and goto statements.\n2. Wrap the execution block in a structured while or for loop.\n3. Replace the conditional goto with a standard 'break' statement or return to exit structural blocks.",
+      "migration_legacy_code": "// Outdated C++ loop with goto\nint count = 1;\nStart:\nif (count > 10) goto End;\nstd::cout << count << std::endl;\ncount++;\ngoto Start;\nEnd: // Exit label",
+      "migration_modern_code": "// Modern C++ structured loop with break\nint count = 1;\nwhile (true) {\n    if (count > 10) {\n        break; // Clean structured jump\n    }\n    std::cout << count << std::endl;\n    count++;\n}",
+      "migration_rationale_why_deprecated": "The use of goto bypasses basic block entry/exit scopes in C++. This leads to critical design issues such as jumping over variable constructors, violating Resource Acquisition Is Initialization (RAII), and preventing automatic cleanup. It creates difficult-to-maintain 'spaghetti code' prohibited by ISO C++ Core Guidelines (ES.76: 'Avoid goto').",
+      "migration_rationale_modern_benefits": "Modern structures (like break, continue, return, or standard loops) guarantee that local destructors are deterministically called, maintaining C++ resource and memory safety. They allow compiler loop-vectorization/optimizations and align directly with professional standards like MISRA C++ and the Google C++ Style Guide."
     }
   ],
   "summary": {
-    "technology_count": 9,
-    "review_candidate_count": 9,
-    "high_priority_count": 1,
+    "technology_count": 10,
+    "review_candidate_count": 10,
+    "high_priority_count": 2,
     "medium_priority_count": 3,
     "low_priority_count": 5
   }

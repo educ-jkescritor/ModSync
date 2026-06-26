@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, DragEvent, useMemo, useRef, useState } from "react";
+import { ChangeEvent, DragEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
   BookOpen,
@@ -17,7 +17,7 @@ import {
   Upload,
   X
 } from "lucide-react";
-import { analyzePdf } from "@/lib/api";
+import { API_BASE_URL, analyzePdf, submitFeedback } from "@/lib/api";
 import { MultiAgentArchitecture } from "@/components/ui/architecture-diagram";
 import type { Recommendation, ReviewPriority, ReviewReport } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -42,10 +42,30 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [stage, setStage] = useState<Stage>("idle");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<ReviewReport | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<FilterValue>("All");
   const [query, setQuery] = useState("");
+  const [activeLightboxImage, setActiveLightboxImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setActiveLightboxImage(null);
+      }
+    }
+    if (activeLightboxImage) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeLightboxImage]);
 
   const progress = stages.find((item) => item.id === stage)?.progress ?? 0;
 
@@ -188,7 +208,7 @@ export default function Home() {
             </div>
 
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-              <Button onClick={runAnalysis} disabled={!file || stage === "uploading" || stage === "extracting" || stage === "analyzing"}>
+              <Button onClick={runAnalysis} disabled={!mounted || !file || stage === "uploading" || stage === "extracting" || stage === "analyzing"}>
                 {stage === "uploading" || stage === "extracting" || stage === "analyzing" ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
@@ -299,10 +319,46 @@ export default function Home() {
               <RecommendationCard
                 key={`${recommendation.technology}-${recommendation.review_priority}`}
                 recommendation={recommendation}
+                uploadId={report?.id}
+                onViewImage={setActiveLightboxImage}
               />
             ))}
           </div>
         </section>
+      )}
+
+      {/* Lightbox Modal */}
+      {activeLightboxImage && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          onClick={() => setActiveLightboxImage(null)}
+        >
+          <button 
+            onClick={() => setActiveLightboxImage(null)}
+            className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition focus:outline-none"
+            aria-label="Close image viewer"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <div 
+            className="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-lg bg-white shadow-2xl border border-white/10 animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src={activeLightboxImage.startsWith("http") || activeLightboxImage.startsWith("/demo-page") ? activeLightboxImage : `${API_BASE_URL}${activeLightboxImage}`} 
+              alt="Visual page reference" 
+              className="max-h-[85vh] max-w-full object-contain"
+            />
+            <div className="bg-slate-900 px-4 py-3 text-center text-white flex items-center justify-between">
+              <span className="text-xs font-semibold text-slate-300">
+                Visual Reference Screenshot
+              </span>
+              <span className="text-[11px] text-slate-400">
+                Click outside or press Escape to close
+              </span>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
@@ -327,7 +383,15 @@ function SummaryTile({
   );
 }
 
-function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
+function RecommendationCard({
+  recommendation,
+  uploadId,
+  onViewImage
+}: {
+  recommendation: Recommendation;
+  uploadId?: number;
+  onViewImage?: (imageUrl: string) => void;
+}) {
   const tone =
     recommendation.review_priority === "High"
       ? "high"
@@ -338,6 +402,30 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
   const priorityRationale =
     recommendation.priority_rationale ??
     `${recommendation.review_priority} priority is based on a ${recommendation.priority_score}/100 score from lifecycle, frequency, lab, and activity indicators.`;
+
+  const [selectedDecision, setSelectedDecision] = useState<"Approve" | "Reject" | "Modify" | null>(null);
+  const [rationale, setRationale] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  async function handleFeedbackSubmit() {
+    if (!selectedDecision) return;
+    setSubmitting(true);
+    try {
+      await submitFeedback({
+        upload_id: uploadId,
+        technology: recommendation.technology,
+        decision: selectedDecision,
+        faculty_rationale: rationale,
+        original_recommendation: JSON.stringify(recommendation)
+      });
+      setSubmitted(true);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Failed to save feedback.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <Card>
@@ -371,7 +459,161 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
               )}
               <RecommendationList recommendations={recommendation.specific_recommendations} />
             </div>
-            <EvidenceAndContext recommendation={recommendation} />
+
+            {/* Migration Assistant Panel */}
+            {recommendation.migration_guide && (
+              <div className="rounded-md border border-border bg-white p-4 shadow-sm">
+                <h3 className="flex items-center gap-2 text-sm font-semibold text-primary">
+                  <Lightbulb className="h-4 w-4" />
+                  Migration Assistant (AI-Generated Guide)
+                </h3>
+                <div className="mt-2 text-xs text-muted-foreground leading-relaxed whitespace-pre-line bg-teal-50/20 p-3 rounded border border-teal-100">
+                  {recommendation.migration_guide}
+                </div>
+
+                {/* Educational Rationale & Standard references */}
+                {(recommendation.migration_rationale_why_deprecated || recommendation.migration_rationale_modern_benefits) && (
+                  <div className="mt-3 grid gap-3 md:grid-cols-2 text-xs">
+                    {recommendation.migration_rationale_why_deprecated && (
+                      <div className="rounded-md border border-rose-100 bg-rose-50/30 p-3">
+                        <span className="font-semibold text-rose-800 flex items-center gap-1.5 mb-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-rose-500 animate-pulse" />
+                          Why it is Outdated & Discouraged
+                        </span>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {recommendation.migration_rationale_why_deprecated}
+                        </p>
+                      </div>
+                    )}
+                    {recommendation.migration_rationale_modern_benefits && (
+                      <div className="rounded-md border border-teal-100 bg-teal-50/30 p-3">
+                        <span className="font-semibold text-teal-800 flex items-center gap-1.5 mb-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
+                          Why the Modern Approach is Superior
+                        </span>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {recommendation.migration_rationale_modern_benefits}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Legacy vs Modern side-by-side code blocks */}
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {recommendation.migration_legacy_code && (
+                    <div className="rounded-md border border-rose-200 bg-rose-50/20 p-3">
+                      <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider block mb-1">Legacy / Deprecated Context</span>
+                      <pre className="text-xs font-mono bg-slate-900 text-slate-100 p-2.5 rounded overflow-x-auto whitespace-pre-wrap max-h-48">
+                        {recommendation.migration_legacy_code}
+                      </pre>
+                    </div>
+                  )}
+                  {recommendation.migration_modern_code && (
+                    <div className="rounded-md border border-teal-200 bg-teal-50/20 p-3">
+                      <span className="text-[10px] font-bold text-teal-700 uppercase tracking-wider block mb-1">Modern / Recommended Replacement</span>
+                      <pre className="text-xs font-mono bg-slate-900 text-slate-100 p-2.5 rounded overflow-x-auto whitespace-pre-wrap max-h-48">
+                        {recommendation.migration_modern_code}
+                      </pre>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <EvidenceAndContext recommendation={recommendation} onViewImage={onViewImage} />
+
+            {/* Human-in-the-Loop Feedback Form */}
+            <div className="rounded-md border border-slate-200 bg-slate-50/60 p-4 shadow-inner mt-6">
+              <h3 className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-primary" />
+                Faculty Human-in-the-Loop Validation
+              </h3>
+              {submitted ? (
+                <div className="mt-3 flex items-start gap-2 text-sm text-teal-800 bg-teal-50 border border-teal-200 p-3 rounded-md">
+                  <CheckCircle2 className="h-5 w-5 text-teal-600 mt-0.5 flex-none" />
+                  <div>
+                    <strong>Validation Logged ({selectedDecision}):</strong>{" "}
+                    <span className="italic">"{rationale || "Acknowledged/Approved"}"</span>
+                    <p className="mt-1 text-xs text-muted-foreground">Feedback stored locally in SQLite feedback database for fine-tuning.</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-3 space-y-3">
+                  <p className="text-xs text-muted-foreground">
+                    Align the ModSync model. Your decision will be saved to SQLite and exported into standard JSONL datasets for subsequent fine-tuning.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      variant={selectedDecision === "Approve" ? "default" : "secondary"}
+                      onClick={() => {
+                        setSelectedDecision("Approve");
+                        if (!rationale) setRationale("Approved standard review recommendation.");
+                      }}
+                      className={cn(selectedDecision === "Approve" && "bg-teal-700 hover:bg-teal-800 text-white")}
+                    >
+                      Approve
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={selectedDecision === "Modify" ? "default" : "secondary"}
+                      onClick={() => {
+                        setSelectedDecision("Modify");
+                        setRationale("");
+                      }}
+                      className={cn(selectedDecision === "Modify" && "bg-slate-700 hover:bg-slate-800 text-white")}
+                    >
+                      Modify
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={selectedDecision === "Reject" ? "default" : "secondary"}
+                      onClick={() => {
+                        setSelectedDecision("Reject");
+                        setRationale("");
+                      }}
+                      className={cn(selectedDecision === "Reject" && "bg-rose-700 hover:bg-rose-800 text-white")}
+                    >
+                      Reject
+                    </Button>
+                  </div>
+
+                  {selectedDecision && (
+                    <div className="space-y-2 animate-in fade-in duration-200">
+                      <label className="block text-xs font-semibold text-slate-700">
+                        {selectedDecision === "Approve" ? "Faculty Rationale (optional):" : "Provide details for this reject/modify decision (required for fine-tuning):"}
+                      </label>
+                      <textarea
+                        value={rationale}
+                        onChange={(e) => setRationale(e.target.value)}
+                        placeholder={selectedDecision === "Approve" ? "e.g., Looks good, will migrate the laboratory codebase." : "e.g., Rejecting because our local corporate partner still requires training on this legacy tech."}
+                        className="w-full text-sm border border-slate-200 rounded-md p-2 h-16 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary bg-white"
+                      />
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          onClick={handleFeedbackSubmit}
+                          disabled={submitting || (selectedDecision !== "Approve" && !rationale.trim())}
+                        >
+                          {submitting ? "Saving..." : "Save Validation Decision"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => {
+                            setSelectedDecision(null);
+                            setRationale("");
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -456,7 +698,13 @@ function RecommendationList({ recommendations }: { recommendations?: string[] })
   );
 }
 
-function EvidenceAndContext({ recommendation }: { recommendation: Recommendation }) {
+function EvidenceAndContext({
+  recommendation,
+  onViewImage
+}: {
+  recommendation: Recommendation;
+  onViewImage?: (imageUrl: string) => void;
+}) {
   const contexts = recommendation.sample_contexts ?? [];
   const reasons = recommendation.page_review_reasons ?? [];
   
@@ -471,23 +719,56 @@ function EvidenceAndContext({ recommendation }: { recommendation: Recommendation
       <div className="mt-3 space-y-4">
         {contexts.map((ctx) => {
           const matchingReason = reasons.find(r => r.page === ctx.page);
+          const imageUrl = matchingReason?.image_url
+            ? (matchingReason.image_url.startsWith("http") || matchingReason.image_url.startsWith("/demo-page")
+                ? matchingReason.image_url
+                : `${API_BASE_URL}${matchingReason.image_url}`)
+            : null;
           
           return (
             <div key={ctx.page} className="rounded-md border border-border bg-white overflow-hidden shadow-sm">
-              <div className="bg-muted px-3 py-2 border-b border-border flex items-center gap-2">
-                <Badge tone="neutral">Page {ctx.page}</Badge>
-                <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Exact Quote</span>
-              </div>
-              <div className="p-4 space-y-3">
-                <blockquote className="border-l-4 border-primary/40 pl-4 italic text-sm text-muted-foreground bg-teal-50/50 py-2 rounded-r-sm">
-                  "{ctx.context_text}"
-                </blockquote>
-                {matchingReason?.reason && (
-                  <p className="text-sm leading-6 text-foreground">
-                    <span className="font-semibold text-primary">AI Context: </span>
-                    {matchingReason.reason}
-                  </p>
+              <div className="bg-muted px-3 py-2 border-b border-border flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <Badge tone="neutral">Page {ctx.page}</Badge>
+                  <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Exact Quote</span>
+                </div>
+                {imageUrl && (
+                  <span className="text-[11px] text-teal-700 font-semibold flex items-center gap-1.5 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-100">
+                    <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
+                    Visual Reference Available
+                  </span>
                 )}
+              </div>
+              <div className="p-4">
+                <div className={cn("grid gap-4 items-start", imageUrl ? "md:grid-cols-[1fr_200px]" : "grid-cols-1")}>
+                  <div className="space-y-3">
+                    <blockquote className="border-l-4 border-primary/40 pl-4 italic text-sm text-muted-foreground bg-teal-50/50 py-2 rounded-r-sm">
+                      "{ctx.context_text}"
+                    </blockquote>
+                    {matchingReason?.reason && (
+                      <p className="text-sm leading-6 text-foreground">
+                        <span className="font-semibold text-primary">AI Context: </span>
+                        {matchingReason.reason}
+                      </p>
+                    )}
+                  </div>
+                  {imageUrl && (
+                    <div 
+                      onClick={() => onViewImage?.(matchingReason?.image_url || "")}
+                      className="group relative flex aspect-[4/3] w-full md:w-[200px] items-center justify-center overflow-hidden rounded-md border border-slate-200 bg-slate-50 cursor-pointer shadow-sm transition hover:border-primary/50"
+                    >
+                      <img 
+                        src={imageUrl} 
+                        alt={`Page ${ctx.page} reference`} 
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <Search className="h-5 w-5 text-white mb-1" />
+                        <span className="text-[10px] font-bold text-white uppercase tracking-wider">View Full Page</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           );
