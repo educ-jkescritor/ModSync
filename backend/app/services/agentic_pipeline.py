@@ -28,71 +28,128 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
     # AGENT 1: The Fast Extraction Scout
     # ==========================================
     print(f"Starting Agent 1: Fast Text Scouting with fallback list: {models_to_try}")
+    import requests
+    from datetime import datetime
+
+    # Combine text from all pages into a structured format for a single AI call
+    combined_text = ""
     for page in pages:
-        text = page.get("text", "")
-        images = page.get("images", [])
+        if page.get("text", "").strip():
+            combined_text += f"--- PAGE {page['page']} ---\n{page['text'][:2000]}\n\n"
+            
+    candidate_pages_dict = {}
+    
+    if combined_text.strip():
+        # Instruct the AI to return product (for the API) and version
+        prompt = (
+            "Extract all programming languages, frameworks, databases, and software tools from the document below. "
+            "Return a JSON object with a single key 'page_technologies' containing an array of objects. "
+            "Each object must have 'page' (integer), 'product' (string, lowercase, alphanumeric with hyphens, e.g. 'python', 'php', 'angularjs'), and 'version' (string, e.g. '5', '3.12', or null if unknown). "
+            "If no technologies are found, return {\"page_technologies\": []}.\n\n"
+            f"Document:\n{combined_text[:100000]}"
+        )
         
-        found_techs = []
-        if text.strip():
-            prompt = (
-                "Extract all programming languages, frameworks, databases, and software tools from the text below. "
-                "Return a JSON object with a single key 'technologies' containing an array of strings. If none are found, return {\"technologies\": []}.\n\n"
-                f"Text:\n{text[:5000]}" # Cap text length just in case
-            )
-            last_error = None
-            for model_name in models_to_try:
-                try:
-                    if model_name.startswith("gpt-"):
-                        response = openai_client.chat.completions.create(
-                            model=model_name,
-                            messages=[{"role": "user", "content": prompt}],
-                            response_format={"type": "json_object"},
+        last_error = None
+        for model_name in models_to_try:
+            try:
+                if model_name.startswith("gpt-"):
+                    response = openai_client.chat.completions.create(
+                        model=model_name,
+                        messages=[{"role": "user", "content": prompt}],
+                        response_format={"type": "json_object"},
+                        temperature=0.1
+                    )
+                    content = response.choices[0].message.content or "{}"
+                else:
+                    response = gemini_client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(
+                            response_mime_type="application/json",
                             temperature=0.1
                         )
-                        content = response.choices[0].message.content or "{}"
-                    else:
-                        response = gemini_client.models.generate_content(
-                            model=model_name,
-                            contents=prompt,
-                            config=types.GenerateContentConfig(
-                                response_mime_type="application/json",
-                                temperature=0.1
-                            )
-                        )
-                        content = response.text or "{}"
+                    )
+                    content = response.text or "{}"
+                    
+                # Strip potential markdown code blocks
+                content_clean = content.strip()
+                if content_clean.startswith("```json"):
+                    content_clean = content_clean[7:]
+                elif content_clean.startswith("```"):
+                    content_clean = content_clean[3:]
+                if content_clean.endswith("```"):
+                    content_clean = content_clean[:-3]
+                    
+                page_techs = json.loads(content_clean.strip()).get("page_technologies", [])
+                
+                # Fetch endoflife.date data for each technology
+                for pt in page_techs:
+                    page_num = pt.get("page")
+                    product = pt.get("product")
+                    version = pt.get("version")
+                    
+                    if page_num and product:
+                        tech_name = product
+                        if version:
+                            tech_name = f"{product} {version}"
+                            
+                        # Query the open-source API
+                        eol_status = "Status unknown"
+                        if version:
+                            try:
+                                api_url = f"https://endoflife.date/api/{product}/{version}.json"
+                                api_resp = requests.get(api_url, timeout=3)
+                                if api_resp.status_code == 200:
+                                    eol_data = api_resp.json()
+                                    eol_date = eol_data.get("eol")
+                                    if eol_date:
+                                        # Compare date to today
+                                        is_past = False
+                                        try:
+                                            if isinstance(eol_date, str) and eol_date < datetime.now().strftime("%Y-%m-%d"):
+                                                is_past = True
+                                        except:
+                                            pass
+                                        
+                                        if is_past:
+                                            eol_status = f"DEAD (Reached End of Life on {eol_date})"
+                                        else:
+                                            eol_status = f"ACTIVE (Supported until {eol_date})"
+                            except Exception as e:
+                                print(f"API Error for {product}: {e}")
+                                
+                        # Save the enriched tech string
+                        enriched_tech = f"{tech_name} [{eol_status}]"
+                        if page_num not in candidate_pages_dict:
+                            candidate_pages_dict[page_num] = []
+                        candidate_pages_dict[page_num].append(enriched_tech)
                         
-                    # Strip potential markdown code blocks
-                    content_clean = content.strip()
-                    if content_clean.startswith("```json"):
-                        content_clean = content_clean[7:]
-                    elif content_clean.startswith("```"):
-                        content_clean = content_clean[3:]
-                    if content_clean.endswith("```"):
-                        content_clean = content_clean[:-3]
-                        
-                    found_techs = json.loads(content_clean.strip()).get("technologies", [])
-                    print(f"  Page {page['page']} tech found: {found_techs} (via {model_name})")
-                    last_error = None
-                    break
-                except Exception as e:
-                    error_msg = str(e).lower()
-                    print(f"  Model {model_name} failed with {error_msg}, trying next...")
-                    last_error = e
-                    continue
-            
-            if last_error:
-                from fastapi import HTTPException
-                raise HTTPException(
-                    status_code=429, 
-                    detail=f"All models failed. Last error: {last_error}"
-                )                
+                print(f"  Agent 1 succeeded (via {model_name})")
+                last_error = None
+                break
+            except Exception as e:
+                error_msg = str(e).lower()
+                print(f"  Model {model_name} failed with {error_msg}, trying next...")
+                last_error = e
+                continue
         
-        if found_techs:
+        if last_error:
+            from fastapi import HTTPException
+            raise HTTPException(
+                status_code=429, 
+                detail=f"All models failed on Agent 1. Last error: {last_error}"
+            )
+            
+    # Rebuild candidate_pages list
+    for page in pages:
+        p_num = page["page"]
+        techs = candidate_pages_dict.get(p_num, [])
+        if techs:
             candidate_pages.append({
-                "page": page["page"],
-                "text": text,
-                "images": images,
-                "techs": found_techs
+                "page": p_num,
+                "text": page.get("text", ""),
+                "images": page.get("images", []),
+                "techs": techs
             })
 
     # ==========================================
@@ -160,6 +217,7 @@ def build_review_report_agentic(pages: list[dict[str, Any]], filename: str | Non
         contents_text = ""
         openai_content_parts = []
         gemini_image_parts = []
+        
         for cp in candidate_pages:
             contents_text += f"\n--- PAGE {cp['page']} ---\n"
             contents_text += f"Agent 1 identified these technologies: {', '.join(cp['techs']) if cp['techs'] else 'None'}\n"
