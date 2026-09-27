@@ -754,34 +754,34 @@ function Field({ label, value }: { label: string; value?: string }) {
 function ScoreBreakdown({ recommendation }: { recommendation: Recommendation }) {
   const rows = [
     {
-      label: "Lifecycle",
+      label: "Industry Relevance",
       value: recommendation.score_breakdown.technology_lifecycle_risk,
       max: 40,
-      description: "Scores how outdated or deprecated a technology is (0-40 pts). High risk means it is End-of-Life and may break labs."
+      description: "Scores how outdated or deprecated a technology is (0-40 pts). High risk indicates it has reached End-of-Life in the software industry."
     },
     {
-      label: "Frequency",
+      label: "Syllabus Frequency",
       value: recommendation.score_breakdown.frequency,
       max: 30,
-      description: "Scores how many times it was mentioned (0-30 pts). High frequency implies the module is structurally dependent on it."
+      description: "Scores how heavily the technology permeates the module (0-30 pts). High frequency indicates major structural dependence."
     },
     {
-      label: "Labs",
+      label: "Practical Dependency",
       value: recommendation.score_breakdown.appears_in_labs,
       max: 20,
-      description: "Adds 20 pts if the technology is used in hands-on labs, as deprecated tooling will immediately block students."
+      description: "Adds 20 pts if the technology is required in hands-on labs, as deprecated tooling may cause compatibility issues on modern student machines."
     },
     {
-      label: "Activities",
+      label: "Assessment Alignment",
       value: recommendation.score_breakdown.appears_in_learning_activities,
       max: 10,
-      description: "Adds 10 pts if the technology is tied to learning outcomes, requiring rubric updates if changed."
+      description: "Adds 10 pts if the technology is tied to graded assessments or outcomes, necessitating rubric redesign if replaced."
     }
   ];
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Priority score {recommendation.priority_score}/100</h3>
+      <h3 className="text-sm font-semibold">Score: {recommendation.priority_score}/100</h3>
       <div className="mt-3 space-y-3">
         {rows.map(({ label, value, max, description }) => {
           const percentage = Math.min(100, Math.max(0, (value / max) * 100));
