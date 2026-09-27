@@ -327,14 +327,25 @@ export default function Home() {
           </div>
 
           <div className="grid gap-4">
-            {filteredRecommendations.map((recommendation) => (
-              <RecommendationCard
-                key={`${recommendation.technology}-${recommendation.review_priority}`}
-                recommendation={recommendation}
-                uploadId={report.id}
-                onImageClick={setExpandedImage}
-              />
-            ))}
+            {filteredRecommendations.length > 0 ? (
+              filteredRecommendations.map((recommendation) => (
+                <RecommendationCard
+                  key={`${recommendation.technology}-${recommendation.review_priority}`}
+                  recommendation={recommendation}
+                  uploadId={report.id}
+                  onImageClick={setExpandedImage}
+                />
+              ))
+            ) : (
+              <div className="rounded-md border border-dashed border-border bg-slate-50 p-10 text-center">
+                <BookOpen className="mx-auto mb-4 h-10 w-10 text-muted-foreground" />
+                <h3 className="text-lg font-semibold text-foreground">No Technologies Detected</h3>
+                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
+                  ModSync could not detect any specific programming languages, frameworks, or databases in this module. 
+                  This is likely a theoretical, foundational, or non-CS curriculum module that does not require technical modernization.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       )}
